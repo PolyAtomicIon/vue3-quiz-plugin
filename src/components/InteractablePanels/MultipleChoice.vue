@@ -10,10 +10,6 @@
 
             :class="{ active: isOptionChosen(item.variant), }"
         />
-        
-        <div class="wrapper">
-            <!-- {{ chosenOption }} -->
-        </div>
     </div>
 
 </template>

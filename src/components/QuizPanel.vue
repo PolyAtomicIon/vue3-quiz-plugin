@@ -25,9 +25,18 @@
             >
                 <h1>{{question.value}}</h1>
                 <multiple-choice
+                    v-if="question.type === 'multiple-choice'"
                     :questionId="question.id"
                     :options="question.options"
                 />
+
+                <multiple-answers
+                    v-else
+                    :questionId="question.id"
+                    :options="question.options"
+                >
+
+                </multiple-answers>
             </div>
         </div>
 
@@ -35,7 +44,7 @@
 </template>
 
 <script>
-    // import MultipleAnswers from './InteractablePanels/MultipleAnswers.vue'
+    import MultipleAnswers from './InteractablePanels/MultipleAnswers.vue'
     import MultipleChoice from './InteractablePanels/MultipleChoice.vue'
 
     import {computed} from 'vue';
@@ -72,7 +81,37 @@
                                 'source': 'https://img.icons8.com/color/452/kahoot.png'
                             }
                         ]
-                    }
+                    },
+                    
+                    {
+                        'id': 2,
+                        'type': 'multiple-answers',
+                        'question': {
+                            'source': '',
+                            'value': 'lorem ipsum',
+                            'type': 'text'
+                        },
+                        'options': [
+                            {   
+                                'variant': 1,
+                                'isChosen': false,
+                                'type': 'audio',
+                                'source': 'http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3'
+                            },
+                            {
+                                'variant': 2,
+                                'isChosen': false,
+                                'type': 'audio',
+                                'source': 'http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3'
+                            },
+                            {
+                                'variant': 3,
+                                'isChosen': false,
+                                'type': 'image',
+                                'source': 'https://img.icons8.com/color/452/kahoot.png'
+                            }
+                        ]
+                    },
                 ],
                 recievedAnswers: {},
             }
@@ -84,7 +123,7 @@
         },
         components: {
             MultipleChoice,
-            // MultipleAnswers
+            MultipleAnswers
         },
 
     }

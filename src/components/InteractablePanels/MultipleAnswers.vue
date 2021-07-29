@@ -2,22 +2,17 @@
     
     <div class="interactable">
         <choosable-option-label
-            v-for="(item, variant) in options"
-            :key="variant"
-            @click="onOptionLabelChosen(variant)"
-            :option="item.option"
+            v-for="item in options"
+            :key="item.variant"
+            @click="onOptionLabelChosen(item.variant)"
+            :type="item.type"
             :source="item.source"
 
-            :class="{ active: item.isChosen }"
+            :class="{ active: isOptionChosen(item.variant), }"
         />
         
         <div class="wrapper">
-            <p 
-                v-for="item in chosenOptions"
-                :key="item"
-            >   
-             Variant {{item}}
-            </p>
+            <!-- {{ chosenOption }} -->
         </div>
     </div>
 
@@ -31,20 +26,37 @@
 
         data(){
             return {
-                chosenOptions: []
             }
-        },        
-        inject: ['options'],
+        },
+        inject: ['recievedAnswers'],
+        props: {
+            options: Array,
+            questionId: Number,
+        },      
+        created() {
+            // init array to not have troubles.
+            this.recievedAnswers.value[this.questionId] = [];
+        },
         components: {
             ChoosableOptionLabel
         },
-        setup(props) {
-            console.log(props.options)
+        setup() {
         },
         methods: {
             onOptionLabelChosen(variant){
-                this.options.value[variant].isChosen ^= 1;
+                if( !this.isOptionChosen(variant) )  
+                    this.recievedAnswers.value[this.questionId].push(variant);
+                else
+                    this.recievedAnswers.value[this.questionId] = this.removeFromArrayByValueReturnArray(this.recievedAnswers.value[this.questionId], variant)
             },
+            isOptionChosen(variant){
+                if( !(this.questionId in this.recievedAnswers.value) )
+                    return false
+                return this.recievedAnswers.value[this.questionId].includes(variant);
+            },
+            removeFromArrayByValueReturnArray(items, value){
+                return items.filter(item => item !== value)
+            }
         },
         computed: {
         }
