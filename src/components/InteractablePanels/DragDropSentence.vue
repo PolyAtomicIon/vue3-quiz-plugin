@@ -24,8 +24,8 @@
       <div class="column">
         <h3>Match the gaps</h3>
         <div
-          v-for="(word, index) in processedSentece"
-          :key="index"
+          v-for="word in processedSentece"
+          :key="word"
           class="two-row"
         >
 
@@ -39,7 +39,7 @@
           <draggable
             v-else
             class="list-group"
-            :list="answers[index-1]"
+            :list="answers[word.index]"
             :move="isOptionDroppable"
             v-bind="dragOptions"
             group="people"
@@ -48,7 +48,7 @@
           >
             <template #item="{ element, index }">
               <div class="list-group-item">
-                {{ element.value }} {{ index }}</div>
+                {{ element }} {{ index }}</div>
             </template>
           </draggable>
 
@@ -75,11 +75,19 @@ export default {
   },
   created(){
     this.processedSentece = this.sentence.split(" ")
+
+    let counter = 0;
+    for(let i = 0; i < this.processedSentece.length; i++)
+      if(this.processedSentece[i] === '[empty]'){
+        this.processedSentece[i] = {'value' : this.processedSentece[i], 'index': counter};
+        counter++;
+      }
+    
     console.log(this.answers)
   },
   methods: {
     isEmpty(word){
-      return word === '[empty]'
+      return typeof word === 'object' && word !== null
     }
   },
 }
