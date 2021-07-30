@@ -15,6 +15,7 @@
                 :key="questionId"
             >  
                Question id {{ questionId }} is chosen {{chosenOption}}
+               
             </p>
         </div>
 
