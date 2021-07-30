@@ -1,33 +1,41 @@
 <template>
   <div class="row">
     <div class="column">
-      <h3>Draggable 1</h3>
+      <h3>Options</h3>
       <draggable
-        class="list-group"
-        :list="list1"
+        class="options-group"
+        :list="options"
+        :move="checkMove"
         group="people"
         @change="log"
         itemKey="name"
       >
         <template #item="{ element, index }">
-          <div class="list-group-item">{{ element.name }} {{ index }}</div>
+          <div class="list-group-item">{{ element.value }} {{ index }}</div>
         </template>
       </draggable>
     </div>
 
     <div class="column">
-      <h3>Draggable 2</h3>  
-      <draggable
-        class="list-group"
-        :list="list2"
-        group="people"
-        @change="log"
-        itemKey="name"
+      <h3>Match the gaps</h3>
+      <div
+        v-for="Id in labelsToMatch.length"
+        :key="Id"
       >
-        <template #item="{ element, index }">
-          <div class="list-group-item">{{ element.name }} {{ index }}</div>
-        </template>
-      </draggable>
+        <draggable
+          class="list-group"
+          :list="recievedAnswers.value[questionId][Id-1]"
+          group="people"
+          @change="log"
+          itemKey="name"
+        >
+          <template #item="{ element, index }">
+            <div class="list-group-item">
+              {{ element.value }} {{ index }}</div>
+          </template>
+        </draggable>
+
+      </div>
     </div>
 
   </div>
@@ -41,31 +49,32 @@ export default {
   components: {
     draggable
   },
-    inject: ["recievedAnswers"],
-    props: {
-        options: Array,
-        questionId: Number,
-    },
+  inject: ["recievedAnswers"],
+  props: {
+      options: Array,
+      labelsToMatch: Array,
+      questionId: Number,
+  },
   data() {
     return {
-      list1: [
-        { name: "John", id: 1 },
-        { name: "Joao", id: 2 },
-        { name: "Jean", id: 3 },
-        { name: "Gerard", id: 4 }
-      ],
-      list2: [
-        { name: "Juan", id: 5 },
-        { name: "Edgard", id: 6 },
-        { name: "Johnson", id: 7 }
-      ]
     };
   },
+  created(){
+    this.recievedAnswers.value[this.questionId] = new Array(this.options.length).fill(null).map(()=> (new Array()))
+    console.log(this.recievedAnswers.value[this.questionId])
+  },
   methods: {
-   
+    
     log: function(evt) {
       window.console.log(evt);
-    }
+    },
+
+    checkMove: function(evt){
+      console.log("fdsf")
+      console.log(evt.relatedContext.list)
+      return (evt.relatedContext.list.length === 0);
+    },
+
   }
 };
 </script>
@@ -83,15 +92,20 @@ export default {
         padding: 5px
     }
 
-    .list-group {
+    .options-group {
         background: indigo;
-        min-height: 300px;
+    }
+
+    .list-group {
+      background: chartreuse;
+      min-height: 64px;
+      margin: 10px
     }
 
     .list-group-item {
         background: lightseagreen;
         margin: 5px;
-        border: solid 2px black;
+        border: solid 2px rgb(78, 75, 75);
         text-align: center;
         font-weight: bold;
         padding: 20px;
