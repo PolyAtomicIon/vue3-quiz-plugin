@@ -15,7 +15,7 @@
                 :key="questionId"
             >  
                Question id {{ questionId }} is chosen {{chosenOption}}
-               
+
             </p>
         </div>
 
@@ -39,11 +39,19 @@
                 />
 
                 <drag-drop-matching
-                    v-else
+                    v-else-if="question.type === 'matching'"
                     :questionId="question.id"
                     :options="question.options"
                     :labelsToMatch="question.labelsToMatch"
                 />
+
+                <drag-drop-sentence
+                    v-else
+                    :questionId="question.id"
+                    :options="question.words"
+                    :sentence="question.sentence"
+                />
+
             </div>
         </div>
 
@@ -53,6 +61,7 @@
 <script>
     import MultipleAnswers from './InteractablePanels/MultipleAnswers.vue'
     import DragDropMatching from './InteractablePanels/DragDropMatching.vue'
+    import DragDropSentence from './InteractablePanels/DragDropSentence.vue'
     import MultipleChoice from './InteractablePanels/MultipleChoice.vue'
 
     import {computed} from 'vue';
@@ -115,7 +124,7 @@
                     },
                     {
                         'id': 3,
-                        'type': 'drag-drop-matching',
+                        'type': 'matching',
                         'task': {
                             'source': '',
                             'value': 'lorem ipsum',
@@ -142,6 +151,19 @@
                             'big', 'small', 'fiction'
                         ]
                     },
+                    {
+                        'id': 4,
+                        'type': 'sentence',
+                        'task': {
+                            'source': '',
+                            'value': 'lorem ipsum',
+                            'type': 'text'
+                        },
+                        'words': [
+                            'big', 'small', 'fiction'
+                        ],
+                        'sentence': 'There was [empty] and [empty] elephant. But it is of course [empty] story'
+                    },
                 ],
                 recievedAnswers: {},
             }
@@ -154,7 +176,8 @@
         components: {
             MultipleChoice,
             MultipleAnswers,
-            DragDropMatching
+            DragDropMatching,
+            DragDropSentence
         },
 
     }

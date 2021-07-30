@@ -2,28 +2,27 @@
 <script>
 import draggable from "vuedraggable";
 export default {
-  name: "two-lists",
-  display: "Two Lists",
-  order: 1,
+  name: "DragDropBase2",
   components: {
     draggable
   },
   inject: ["recievedAnswers"],
   props: {
-      options: Array,
-      labelsToMatch: Array,
-      questionId: Number,
+    options: Array,
+    questionId: Number,
   },
   data() {
     return {
       optionsCopy: [],
-      answers: []
+      answers: [],
+      numberOfLabels: -1
     };
   },
   created(){
     // create Arrays for every option (label to match)
     this.optionsCopy = this.options;
-    this.answers = Array.from(Array(this.options.length), () => new Array())
+    this.numberOfLabels = this.options.length;
+    this.answers = Array.from(Array(this.numberOfLabels), () => new Array())
   },
   methods: {
     
@@ -54,7 +53,7 @@ export default {
 
       const elementToBeSaved = evt.added.element;
 
-      for(let i = 0; i < this.labelsToMatch.length; i++){
+      for(let i = 0; i < this.numberOfLabels; i++){
         if(this.answers[i].length > 1) {
           this.swapLabels(i, elementToBeSaved);
         }

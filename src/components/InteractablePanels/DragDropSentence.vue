@@ -24,12 +24,12 @@
       <div class="column">
         <h3>Match the gaps</h3>
         <div
-          v-for="Id in labelsToMatch.length"
+          v-for="Id in numberOfLabels"
           :key="Id"
           class="two-row"
         >
 
-          <div class="text-container">{{labelsToMatch[Id-1]}}</div>
+          <div class="text-container">{{options[Id-1]}}</div>
 
           <draggable
             class="list-group"
@@ -57,10 +57,13 @@
 import DragDropBase2 from './DragDropBase.vue'
 
 export default {
-  name: "DragDropMatching",
+  name: "DragDropSentence",
   extends: DragDropBase2,
-  props: {
-    labelsToMatch: Array,
+  props: [
+    'sentence'
+  ],
+  created(){
+    console.log(this.sentence)
   }
 }
 </script>
