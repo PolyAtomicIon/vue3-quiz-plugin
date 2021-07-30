@@ -20,38 +20,39 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="column">
-        <h3>Match the gaps</h3>
-        <div
-          v-for="word in processedSentece"
-          :key="word"
-          class="two-row"
-        >
-
-          <div 
-            v-if="!isEmpty(word)"
-            class="text-container"
+    <div>
+      <div class="row">
+        <div class="paragraph">
+          <div
+            v-for="word in processedSentece"
+            :key="word"
+            class="sentence"
           >
-            {{word}}
+
+            <div 
+              v-if="!isEmpty(word)"
+              class="text-container"
+            >
+              {{word}}
+            </div>
+
+            <draggable
+              v-else
+              class="list-group"
+              :list="answers[word.index]"
+              :move="isOptionDroppable"
+              v-bind="dragOptions"
+              group="people"
+              @change="[checkAndCleanUpDraggables, updateAnswers]"
+              itemKey="name"
+            >
+              <template #item="{ element, index }">
+                <div class="list-group-item">
+                  {{ element }} {{ index }}</div>
+              </template>
+            </draggable>
+
           </div>
-
-          <draggable
-            v-else
-            class="list-group"
-            :list="answers[word.index]"
-            :move="isOptionDroppable"
-            v-bind="dragOptions"
-            group="people"
-            @change="[checkAndCleanUpDraggables, updateAnswers]"
-            itemKey="name"
-          >
-            <template #item="{ element, index }">
-              <div class="list-group-item">
-                {{ element }} {{ index }}</div>
-            </template>
-          </draggable>
-
         </div>
       </div>
 
@@ -93,10 +94,10 @@ export default {
 }
 </script>
        
-<style >
+<style scoped>
 
   .row {
-    background: red;
+    background: indigo;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -140,7 +141,6 @@ export default {
 
   .text-container {
     padding: 20px;
-    margin: 10px;
     background: orange;
   }
 
@@ -153,24 +153,34 @@ export default {
 
   .list-group {
     background: chartreuse;
-    min-height: 64px;
-    max-height: 96px;
-    width: 200px;
-    margin: 10px
+    width: 96px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .list-group-item {
     background: lightseagreen;
-    margin: 5px;
     border: solid 2px rgb(78, 75, 75);
     text-align: center;
     font-weight: bold;
     cursor: move;
-    padding: 20px;
+    padding: 5px;
   }
 
   .list-group-item:hover {
     background: green;
+  }
+
+  .paragraph {
+    display: flex;
+    max-width: 100%;
+    flex-flow: row wrap;
+    margin: 20px;
+    background: khaki;
+  }
+  .sentence {
   }
 
 </style>

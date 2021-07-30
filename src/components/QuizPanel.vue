@@ -122,35 +122,35 @@
                             }
                         ]
                     },
-                    // {
-                    //     'id': 3,
-                    //     'type': 'matching',
-                    //     'task': {
-                    //         'source': '',
-                    //         'value': 'lorem ipsum',
-                    //         'type': 'text'
-                    //     },
-                    //     'options': [
-                    //         {   
-                    //             'variant': 1,
-                    //             'type': 'text',
-                    //             'value': 'Elephant'
-                    //         },
-                    //         {
-                    //             'variant': 2,
-                    //             'type': 'text',
-                    //             'value': 'Pig'
-                    //         },
-                    //         {
-                    //             'variant': 3,
-                    //             'type': 'text',
-                    //             'value': 'Dragon'
-                    //         }
-                    //     ],
-                    //     'labelsToMatch': [
-                    //         'big', 'small', 'fiction'
-                    //     ]
-                    // },
+                    {
+                        'id': 3,
+                        'type': 'matching',
+                        'task': {
+                            'source': '',
+                            'value': 'lorem ipsum',
+                            'type': 'text'
+                        },
+                        'options': [
+                            {   
+                                'variant': 1,
+                                'type': 'text',
+                                'value': 'Elephant'
+                            },
+                            {
+                                'variant': 2,
+                                'type': 'text',
+                                'value': 'Pig'
+                            },
+                            {
+                                'variant': 3,
+                                'type': 'text',
+                                'value': 'Dragon'
+                            }
+                        ],
+                        'labelsToMatch': [
+                            'big', 'small', 'fiction'
+                        ]
+                    },
                     {
                         'id': 4,
                         'type': 'sentence',
