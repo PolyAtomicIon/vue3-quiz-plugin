@@ -4,8 +4,9 @@
       <h3>Options</h3>
       <draggable
         class="options-group"
+        :move="isOptionDroppable"
         :list="options"
-        :move="checkMove"
+        v-bind="dragOptions"
         group="people"
         @change="log"
         itemKey="name"
@@ -25,6 +26,8 @@
         <draggable
           class="list-group"
           :list="recievedAnswers.value[questionId][Id-1]"
+          :move="isOptionDroppable"
+          v-bind="dragOptions"
           group="people"
           @change="log"
           itemKey="name"
@@ -60,8 +63,8 @@ export default {
     };
   },
   created(){
-    this.recievedAnswers.value[this.questionId] = new Array(this.options.length).fill(null).map(()=> (new Array()))
-    console.log(this.recievedAnswers.value[this.questionId])
+    // create Arrays for every option (label to match)
+    this.recievedAnswers.value[this.questionId] = Array.from(Array(this.options.length), () => new Array())
   },
   methods: {
     
@@ -69,17 +72,30 @@ export default {
       window.console.log(evt);
     },
 
-    checkMove: function(evt){
-      console.log("fdsf")
-      console.log(evt.relatedContext.list)
-      return (evt.relatedContext.list.length === 0);
+    isOptionDroppable: function(evt){
+      console.log(evt)
+      if( evt.to.className === 'options-group' )
+        return true
+      return (evt.relatedContext.list.length === 0) || evt.relatedContext.list.includes(evt.draggedContext.element);
     },
 
+  },
+  computed: {
+    dragOptions() {
+      return {
+        animation: 200,
+        group: "description",
+        disabled: false,
+        ghostClass: "ghost-ticket",
+        chosenClass: "chosen-ticket",
+        dragClass: "dragging-ticket",
+      };
+    }
   }
-};
+}
 </script>
        
-<style scoped>
+<style >
 
     .row {
         display: flex;
@@ -93,8 +109,41 @@ export default {
     }
 
     .options-group {
-        background: indigo;
+      min-height: 200px;
+      background: indigo;
     }
+    .button {
+  margin-top: 35px;
+}
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.no-move {
+  transition: transform 0s;
+}
+.list-group {
+  min-height: 20px;
+}
+.list-group-item {
+  cursor: move;
+}
+.list-group-item i {
+  cursor: pointer;
+}
+ 
+    .chosen-ticket {
+      background: darkorange !important;
+      opacity: 1;
+    }
+    .dragging-ticket {
+      background: darkred !important;
+      background-color: darkred !important;
+      opacity: 1 !important;
+      box-shadow: none !important;
+      border: 2px solid black;
+    }
+    .ghost-ticket {
+    } 
 
     .list-group {
       background: chartreuse;
