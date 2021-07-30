@@ -11,9 +11,9 @@
           group="people"
           itemKey="name"
         >
-          <template #item="{ element, index }">
+          <template #item="{ element }">
             <div class="options-group-item">
-              {{ element.value }} {{ index }}
+              {{ element }}
             </div>
           </template>
         </draggable>
@@ -24,16 +24,22 @@
       <div class="column">
         <h3>Match the gaps</h3>
         <div
-          v-for="Id in numberOfLabels"
-          :key="Id"
+          v-for="(word, index) in processedSentece"
+          :key="index"
           class="two-row"
         >
 
-          <div class="text-container">{{options[Id-1]}}</div>
+          <div 
+            v-if="!isEmpty(word)"
+            class="text-container"
+          >
+            {{word}}
+          </div>
 
           <draggable
+            v-else
             class="list-group"
-            :list="answers[Id-1]"
+            :list="answers[index-1]"
             :move="isOptionDroppable"
             v-bind="dragOptions"
             group="people"
@@ -59,12 +65,23 @@ import DragDropBase2 from './DragDropBase.vue'
 export default {
   name: "DragDropSentence",
   extends: DragDropBase2,
-  props: [
-    'sentence'
-  ],
+  props: {
+    sentence: String,
+  },
+  data(){
+    return {
+      processedSentece: []
+    }
+  },
   created(){
-    console.log(this.sentence)
-  }
+    this.processedSentece = this.sentence.split(" ")
+    console.log(this.answers)
+  },
+  methods: {
+    isEmpty(word){
+      return word === '[empty]'
+    }
+  },
 }
 </script>
        
