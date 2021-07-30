@@ -8,7 +8,6 @@
         :list="optionsCopy"
         v-bind="dragOptions"
         group="people"
-        @change="log"
         itemKey="name"
       >
         <template #item="{ element, index }">
@@ -35,7 +34,7 @@
           :move="isOptionDroppable"
           v-bind="dragOptions"
           group="people"
-          @change="[log, checkAndCleanUpDraggables]"
+          @change="[checkAndCleanUpDraggables]"
           itemKey="name"
         >
           <template #item="{ element, index }">
@@ -99,6 +98,10 @@ export default {
       return false;
     },
     checkAndCleanUpDraggables: function(evt){
+
+      if( !evt.added )
+        return
+
       const elementToBeSaved = evt.added.element;
 
       for(let i = 0; i < this.labelsToMatch.length; i++){
