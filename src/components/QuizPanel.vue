@@ -1,14 +1,9 @@
 <template>
     <div class="wrapper">
 
-        <div class="timer"></div>
-        <div class="question-panel">
-            <h1>Question number 1</h1>
-            <div class="question">
-                Lorem, ipsum dolor.
-            </div>
-        </div>
+        <div class="timer">Time left 60sec</div>
         
+        <!-- demo, for checking state of answers -->
         <div class="wrapper blue-background">
             <p
                 v-for="(chosenOption, questionId) in recievedAnswers"
@@ -20,40 +15,55 @@
         </div>
 
         <div class="interaction-panel">
-            <div
-                v-for="question in questions"
-                :key="question.id"
-                class="question"
+            <transition 
+                :duration="{ enter: 500, leave: 300 }" 
+                enter-active-class="animated zoomIn" 
+                leave-active-class="animated zoomOut" 
+                mode="out-in"
             >
-                <h1>fsdfs {{question.task.value}}</h1>
-                <multiple-choice
-                    v-if="question.type === 'multiple-choice'"
-                    :questionId="question.id"
-                    :options="question.options"
-                />
 
-                <multiple-answers
-                    v-else-if="question.type === 'multiple-answers'"
-                    :questionId="question.id"
-                    :options="question.options"
-                />
+                <div
+                    :key="questionIndex"
+                    class="question"
+                >
+                    <h1>fsdfs {{questions[questionIndex].task.value}}</h1>
+                    <multiple-choice
+                        v-if="questions[questionIndex].type === 'multiple-choice'"
+                        :questionId="questionIndex"
+                        :options="questions[questionIndex].options"
+                    />
 
-                <drag-drop-matching
-                    v-else-if="question.type === 'matching'"
-                    :questionId="question.id"
-                    :options="question.options"
-                    :labelsToMatch="question.labelsToMatch"
-                />
+                    <multiple-answers
+                        v-else-if="questions[questionIndex].type === 'multiple-answers'"
+                        :questionId="questionIndex"
+                        :options="questions[questionIndex].options"
+                    />
 
-                <drag-drop-sentence
-                    v-else
-                    :questionId="question.id"
-                    :options="question.words"
-                    :sentence="question.sentence"
-                />
+                    <drag-drop-matching
+                        v-else-if="questions[questionIndex].type === 'matching'"
+                        :questionId="questionIndex"
+                        :options="questions[questionIndex].options"
+                        :labelsToMatch="questions[questionIndex].labelsToMatch"
+                    />
 
-            </div>
+                    <drag-drop-sentence
+                        v-else
+                        :questionId="questionIndex"
+                        :options="questions[questionIndex].words"
+                        :sentence="questions[questionIndex].sentence"
+                    />
+
+                </div>
+
+            </transition>
         </div>
+
+        <button
+            @click="next"
+            class="submit-button"
+        >
+            Submit
+        </button>
 
     </div>
 </template>
@@ -165,12 +175,18 @@
                         'sentence': 'There was [empty] and [empty] elephant. But it is of course [empty] story'
                     },
                 ],
+                questionIndex: 0,
                 recievedAnswers: {},
             }
         },
         provide() {
             return {
                 recievedAnswers: computed(() => this.recievedAnswers)
+            }
+        },
+        methods: {
+            next(){
+                this.questionIndex += 1;
             }
         },
         components: {
@@ -200,6 +216,18 @@
 
     .blue-background {
         background: lightskyblue;
+    }
+
+    .animated {
+        transition-duration: 1;
+    }
+
+    .submit-button {
+        height: 36px;
+        width: 128px;
+        background: cornsilk;
+        border-radius: 5px;
+        box-shadow: rgba(255,0,0,0.25) 0px 1px 1px 1px;
     }
 
 </style>
