@@ -15,12 +15,7 @@
         </div>
 
         <div class="interaction-panel">
-            <transition 
-                :duration="{ enter: 500, leave: 300 }" 
-                enter-active-class="animated zoomIn" 
-                leave-active-class="animated zoomOut" 
-                mode="out-in"
-            >
+            <transition-group name="slide-fade" mode="out-in">
 
                 <div
                     :key="questionIndex"
@@ -55,7 +50,7 @@
 
                 </div>
 
-            </transition>
+            </transition-group>
         </div>
 
         <button
@@ -218,8 +213,18 @@
         background: lightskyblue;
     }
 
-    .animated {
-        transition-duration: 1;
+    .slide-fade-enter-active {
+        transition: all 1s ease-out;
+    }
+
+    .slide-fade-leave-active {
+        transition: all 0   s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+
+    .slide-fade-enter-from,
+    .slide-fade-leave-to {
+        transform: translateX(50px);
+        opacity: 0;
     }
 
     .submit-button {
