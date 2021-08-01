@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
 
-        <div class="timer">Time left 60sec</div>
+        <div class="timer">Time left {{countDown}}</div>
         
         <!-- demo, for checking state of answers -->
         <div class="wrapper blue-background">
@@ -21,7 +21,7 @@
                     :key="questionIndex"
                     class="question"
                 >
-                    <h1>fsdfs {{questions[questionIndex].task.value}}</h1>
+                    <!-- <h1>fsdfs {{questions[questionIndex].task.value}}</h1> -->
                     <multiple-choice
                         v-if="questions[questionIndex].type === 'multiple-choice'"
                         :questionId="questionIndex"
@@ -171,6 +171,7 @@
                     },
                 ],
                 questionIndex: 0,
+                countDown: 7,
                 recievedAnswers: {},
             }
         },
@@ -181,8 +182,25 @@
         },
         methods: {
             next(){
+                if(this.questionIndex == 3) return
                 this.questionIndex += 1;
+            },
+            countDownTimer() {
+                if(this.countDown > 0) {
+                    setTimeout(() => {
+                        this.countDown -= 1
+                        this.countDownTimer()
+                    }, 1000)
+                }
+                else{
+                    this.next();
+                    this.countDown = 7;
+                    this.countDownTimer();
+                }
             }
+        },
+        created(){
+           this.countDownTimer()
         },
         components: {
             MultipleChoice,

@@ -154,7 +154,7 @@ export default {
   .list-group {
     background: chartreuse;
     width: 96px;
-    height: 56px;
+    height: 96px;
     display: flex;
     align-items: center;
     justify-content: center;
