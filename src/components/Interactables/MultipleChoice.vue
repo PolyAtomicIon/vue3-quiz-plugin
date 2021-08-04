@@ -57,6 +57,7 @@
     .interactable {
         display: flex;
         justify-content: center;
+        flex-wrap: wrap;
         background: lightgreen;
     }
 

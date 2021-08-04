@@ -1,5 +1,5 @@
 <template>
-    <div class="timer">Time left {{countDown}}</div>
+    <div class="timer wrapper">Time left {{countDown}}</div>
 </template>
 
 <script>
@@ -58,3 +58,9 @@ export default {
 
 }
 </script>
+
+<style scoped>
+    .timer {
+        background: lightcoral
+    }
+</style>

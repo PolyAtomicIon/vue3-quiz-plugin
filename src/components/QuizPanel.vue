@@ -4,11 +4,11 @@
         <timer-component
             :iteration="questionIndex"
             :secondsToCountDown="secondsToCountDown"
-            :onTimerEnd="startNextQuestion"
+            :onTimerEnd="startNextQuestionOrEndQuiz"
         />
 
         <!-- demo, for checking state of answers -->
-        <div class="blue-background">
+        <div class="wrapper blue-background">
             Question id {{ questionIndex+1 }} is chosen 
             {{recievedAnswers[questionIndex+1]}}
         </div>
@@ -30,7 +30,7 @@
         </div> 
 
         <button
-            @click="startNextQuestion"
+            @click="startNextQuestionOrEndQuiz"
             class="submit-button"
         >
             Submit
@@ -189,17 +189,28 @@
                 questionIndex: -1,
                 secondsToCountDown: 0,
                 recievedAnswers: {},
-                isTimerReset: false
             }
+        },
+        props: {
+            onQuizEnd: {
+                type: Function
+            },
+
         },
         provide() {
             return {
                 recievedAnswers: computed(() => this.recievedAnswers)
             }
         },
+        created(){
+           this.startNextQuestionOrEndQuiz()
+        },
         methods: {
-            startNextQuestion(){
-                if(this.questionIndex == this.questions.length) return
+            startNextQuestionOrEndQuiz(){
+                if(this.questionIndex == this.questions.length) {
+                    this.onQuizEnd();
+                    return
+                }
 
                 this.questionIndex += 1;
                 this.secondsToCountDown = this.questions[this.questionIndex].time;
@@ -209,9 +220,6 @@
             isQuizActive(){
                 return this.questionIndex < this.questions.length;
             }
-        },
-        created(){
-           this.startNextQuestion()
         },
         components: {
             InteractablePanel,
