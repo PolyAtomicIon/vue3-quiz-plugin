@@ -28,7 +28,6 @@
         },
         methods: {
             isSubmitted(){
-                console.log(this.showAnswers.value)
                 return this.showAnswers.value[this.questionId] 
             }
         },
