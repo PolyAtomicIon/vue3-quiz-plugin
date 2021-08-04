@@ -30,10 +30,19 @@
         </div> 
 
         <button
-            @click="startNextQuestionOrEndQuiz"
+            v-if="!showAnswers[questionIndex]"
+            @click="checkAnswer"
             class="submit-button"
         >
             Submit
+        </button>
+
+        <button
+            v-else
+            @click="startNextQuestionOrEndQuiz"
+            class="submit-button"
+        >
+            Next
         </button>
 
     </div>
@@ -53,6 +62,7 @@
                 questionIndex: -1,
                 secondsToCountDown: 0,
                 recievedAnswers: {},
+                showAnswers: {}
             }
         },
         props: {
@@ -69,6 +79,7 @@
         provide() {
             return {
                 recievedAnswers: computed(() => this.recievedAnswers),
+                showAnswers: computed(() => this.showAnswers),
             }
         },
         created(){
@@ -76,6 +87,9 @@
             this.startNextQuestionOrEndQuiz()
         },
         methods: {
+            checkAnswer(){
+                this.showAnswers[this.questionIndex + 1] = true
+            },
             startNextQuestionOrEndQuiz(){
 
                 if( this.questionIndex === this.questions.length )

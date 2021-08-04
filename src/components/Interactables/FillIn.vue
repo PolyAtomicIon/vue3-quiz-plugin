@@ -10,6 +10,7 @@
 </template>
 
 <script>
+    import InteractableBase from './InteractableBase.vue';
 
     export default {
 
@@ -17,16 +18,17 @@
             return {
             }
         },
+        extends: InteractableBase,
         inject: ['recievedAnswers'],
-        props: {
-            questionId: Number,
-        },      
         created() {
             this.recievedAnswers.value[this.questionId] = '';
         },
         setup() {
         },
         methods: {
+            checkAnswers(){
+                console.log("CheckAnswers 23")
+            },
         },
         computed: {
         }
