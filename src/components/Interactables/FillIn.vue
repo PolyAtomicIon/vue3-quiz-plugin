@@ -13,13 +13,11 @@
     import InteractableBase from './InteractableBase.vue';
 
     export default {
-
+        extends: InteractableBase,
         data(){
             return {
             }
         },
-        extends: InteractableBase,
-        inject: ['recievedAnswers'],
         created() {
             this.recievedAnswers.value[this.questionId] = '';
         },

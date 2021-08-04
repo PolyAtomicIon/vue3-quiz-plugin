@@ -30,7 +30,7 @@
         </div> 
 
         <button
-            v-if="!showAnswers[questionIndex]"
+            v-if="!showAnswers[questionIndex + 1]"
             @click="checkAnswer"
             class="submit-button"
         >

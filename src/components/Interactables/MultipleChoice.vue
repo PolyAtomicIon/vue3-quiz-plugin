@@ -17,17 +17,17 @@
 <script>
 
     import ChoosableOptionLabel from '../ChoosableOptionLabel.vue'
+    import InteractableBase from './InteractableBase.vue'
 
     export default {
 
+        extends: InteractableBase,
         data(){
             return {
             }
         },
-        inject: ['recievedAnswers'],
         props: {
             options: Array,
-            questionId: Number,
         },      
         created() {
         },
@@ -37,6 +37,9 @@
         setup() {
         },
         methods: {
+            checkAnswers(){
+                console.log("CheckAnswers 23")
+            },
             onOptionLabelChosen(variant){
                 this.recievedAnswers.value[this.questionId] = [variant];
             },

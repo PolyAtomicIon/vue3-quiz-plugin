@@ -1,22 +1,20 @@
 
 <script>
 import draggable from "vuedraggable";
+import InteractableBase from './InteractableBase.vue'
+
 export default {
   name: "DragDropBase2",
+  extends: InteractableBase,
   components: {
     draggable
   },
-  inject: ["recievedAnswers"],
   props: {
     options: {
       type: Array,
       default(){
         return new Array();
       }
-    },
-    questionId: {
-      type: Number,
-      default: -1
     },
   },
   data() {
@@ -34,6 +32,9 @@ export default {
   },
   methods: {
     
+    checkAnswers(){
+      console.log("CheckAnswers 23")
+    },
     log: function(evt) {
       window.console.log(evt);
     },

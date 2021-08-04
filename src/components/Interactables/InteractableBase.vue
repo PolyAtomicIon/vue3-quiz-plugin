@@ -5,10 +5,13 @@
             return {
             }
         },
-        inject: ['showAnswers'],
+        inject: ['showAnswers', 'recievedAnswers'],
         props: {
-            questionId: Number,
-        },  
+            questionId: {
+                type: Number,
+                default: 0
+            },
+        },
         watch: {
             showAnswers: {
                 handler(){
