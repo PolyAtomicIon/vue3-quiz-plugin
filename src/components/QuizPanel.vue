@@ -1,34 +1,29 @@
 <template>
     <div class="wrapper">
 
-        <div class="timer">Time left {{countDown}}</div>
-        
+        <timer-component
+            :isTimerReset="isTimerReset"
+            :timeToCountDown="timeToCountDown"
+            :onTimerEnd="startNextQuestion"
+        />
+
         <!-- demo, for checking state of answers -->
         <div class="blue-background">
-            <p
-                v-for="(chosenOption, questionId) in recievedAnswers"
-                :key="questionId"
-            >  
-               Question id {{ questionId }} is chosen {{chosenOption}}
-
-            </p>
+            Question id {{ questionIndex+1 }} is chosen 
+            {{recievedAnswers[questionIndex+1]}}
         </div>
 
-        <div class="interaction-panel"
-        >
+        <div class="interaction-panel">
             <transition-group name="slide-fade" mode="out-in">
-
-                <div
+                <question-component
+                    :type="questions[questionIndex].task.type"
+                    :content="questions[questionIndex].task.content"
+                ></question-component>
+                <interactable-panel
+                    :question="questions[questionIndex]"  
+                        
                     :key="questionIndex"
-                    class="question"
-                >
-                   
-                    <interactable-panel
-                        :question="questions[questionIndex]"                    
-                    />
-
-                </div>
-
+                />
             </transition-group>
         </div> 
 
@@ -47,6 +42,8 @@
     import {computed} from 'vue';
 
     import InteractablePanel from './InteractablePanel.vue';
+    import QuestionComponent from './QuestionComponent.vue';
+    import TimerComponent from './TimerComponent.vue';
 
     export default {
         data() {
@@ -56,8 +53,7 @@
                         'id': 1,
                         'type': 'multiple-choice',
                         'task': {
-                            'source': '',
-                            'value': 'lorem ipsum',
+                            'content': 'lorem ipsum',
                             'type': 'text'
                         },
                         'time': 5,
@@ -83,8 +79,7 @@
                         'id': 2,
                         'type': 'multiple-answers',
                         'task': {
-                            'source': '',
-                            'value': 'lorem ipsum',
+                            'content': 'lorem ipsum',
                             'type': 'text'
                         },
                         'options': [
@@ -109,8 +104,7 @@
                         'id': 3,
                         'type': 'drag-drop-matching',
                         'task': {
-                            'source': '',
-                            'value': 'lorem ipsum',
+                            'content': 'lorem ipsum',
                             'type': 'text'
                         },
                         'time': 5,
@@ -139,8 +133,7 @@
                         'id': 4,
                         'type': 'drag-drop-sentence',
                         'task': {
-                            'source': '',
-                            'value': 'lorem ipsum',
+                            'content': 'lorem ipsum',
                             'type': 'text'
                         },
                         'options': [
@@ -149,11 +142,10 @@
                         'sentence': 'There was [empty] and [empty] elephant. But it is of course [empty] story'
                     },
                     {
-                        'id': 1,
+                        'id': 5,
                         'type': 'multiple-choice',
                         'task': {
-                            'source': '',
-                            'value': 'lorem ipsum',
+                            'content': 'lorem ipsum',
                             'type': 'text'
                         },
                         'time': 5,
@@ -180,11 +172,20 @@
                             },
                         ]
                     },
+                    {
+                        'id': 6,
+                        'type': 'fill-in',
+                        'task': {
+                            'content': 'lorem ipsum',
+                            'type': 'text'
+                        },
+                        'time': 45,
+                    },
                 ],
                 questionIndex: -1,
-                defaultCountDownTime: 20,
-                countDown: 20,
+                timeToCountDown: 0,
                 recievedAnswers: {},
+                isTimerReset: false
             }
         },
         provide() {
@@ -195,28 +196,12 @@
         methods: {
             startNextQuestion(){
                 if(this.questionIndex == this.questions.length) return
+                
                 this.questionIndex += 1;
-                this.restartTimer(this.questions[this.questionIndex].time);
+                // this.restartTimer(this.questions[this.questionIndex].time);
+                this.isTimerReset = true;
+                this.timeToCountDown = this.questions[this.questionIndex].time;
             },
-            countDownTimer() {
-                if(this.countDown > 0) {
-                    setTimeout(() => {
-                        this.countDown -= 1
-                        this.countDownTimer()
-                      }, 1000)
-                }
-                else{
-                    this.startNextQuestion();
-                }
-            },
-            restartTimer(seconds){
-
-                if( !seconds )
-                    seconds = this.defaultCountDownTime
-
-                this.countDown = seconds;
-                this.countDownTimer();
-            }
         },
         computed: {
             isQuizActive(){
@@ -228,6 +213,8 @@
         },
         components: {
             InteractablePanel,
+            QuestionComponent,
+            TimerComponent,
         },
 
     }

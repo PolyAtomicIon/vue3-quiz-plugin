@@ -5,7 +5,6 @@ import ImageLabel from "./Labels/ImageLabel.vue";
 import TextLabel from "./Labels/TextLabel.vue";
 
 export default {
-  // We can simplify this
   props: {
     type: String,
     source: String,
