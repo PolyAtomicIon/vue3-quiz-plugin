@@ -67,7 +67,7 @@
     }
 
     .active {
-        border: 3px red solid;
+        border: 3px cyan solid;
     }
 
 </style>

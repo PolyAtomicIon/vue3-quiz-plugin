@@ -68,7 +68,7 @@
         },
         provide() {
             return {
-                recievedAnswers: computed(() => this.recievedAnswers)
+                recievedAnswers: computed(() => this.recievedAnswers),
             }
         },
         created(){
