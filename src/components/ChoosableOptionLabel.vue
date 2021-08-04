@@ -2,6 +2,7 @@
 import { h, resolveComponent } from "vue";
 import AudioLabel from "./Labels/AudioLabel.vue";
 import ImageLabel from "./Labels/ImageLabel.vue";
+import TextLabel from "./Labels/TextLabel.vue";
 
 export default {
   // We can simplify this
@@ -12,6 +13,7 @@ export default {
   components: {
     AudioLabel,
     ImageLabel,
+    TextLabel
   },
   setup(props) {
 
@@ -24,8 +26,8 @@ export default {
         "button",
         { 
             onClick: function() {
-                // alert(props.option);
-                console.log(props.type)
+              // alert(props.option);
+              console.log(props.type)
             },
             class: "choosableOption" 
         },
@@ -47,6 +49,7 @@ export default {
   border-radius: 5px;
 
   height: 100px;
+  min-width: 100px;
 
   padding: 20px;
   margin: 10px;

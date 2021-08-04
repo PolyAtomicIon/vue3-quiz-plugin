@@ -60,7 +60,12 @@ export default {
   name: "DragDropMatching",
   extends: DragDropBase2,
   props: {
-    labelsToMatch: Array,
+    labelsToMatch: {
+      type: Array,
+      default(){
+        return new Array();
+      }
+    }
   }
 }
 </script>

@@ -4,7 +4,7 @@
         <div class="timer">Time left {{countDown}}</div>
         
         <!-- demo, for checking state of answers -->
-        <div class="wrapper blue-background">
+        <div class="blue-background">
             <p
                 v-for="(chosenOption, questionId) in recievedAnswers"
                 :key="questionId"
@@ -14,62 +14,39 @@
             </p>
         </div>
 
-        <div class="interaction-panel">
+        <div class="interaction-panel"
+        >
             <transition-group name="slide-fade" mode="out-in">
 
                 <div
                     :key="questionIndex"
                     class="question"
                 >
-                    <!-- <h1>fsdfs {{questions[questionIndex].task.value}}</h1> -->
-                    <multiple-choice
-                        v-if="questions[questionIndex].type === 'multiple-choice'"
-                        :questionId="questionIndex"
-                        :options="questions[questionIndex].options"
-                    />
-
-                    <multiple-answers
-                        v-else-if="questions[questionIndex].type === 'multiple-answers'"
-                        :questionId="questionIndex"
-                        :options="questions[questionIndex].options"
-                    />
-
-                    <drag-drop-matching
-                        v-else-if="questions[questionIndex].type === 'matching'"
-                        :questionId="questionIndex"
-                        :options="questions[questionIndex].options"
-                        :labelsToMatch="questions[questionIndex].labelsToMatch"
-                    />
-
-                    <drag-drop-sentence
-                        v-else
-                        :questionId="questionIndex"
-                        :options="questions[questionIndex].words"
-                        :sentence="questions[questionIndex].sentence"
+                   
+                    <interactable-panel
+                        :question="questions[questionIndex]"                    
                     />
 
                 </div>
 
             </transition-group>
-        </div>
+        </div> 
 
         <button
-            @click="next"
+            @click="startNextQuestion"
             class="submit-button"
         >
             Submit
         </button>
 
     </div>
+    
 </template>
 
 <script>
-    import MultipleAnswers from './InteractablePanels/MultipleAnswers.vue'
-    import DragDropMatching from './InteractablePanels/DragDropMatching.vue'
-    import DragDropSentence from './InteractablePanels/DragDropSentence.vue'
-    import MultipleChoice from './InteractablePanels/MultipleChoice.vue'
-
     import {computed} from 'vue';
+
+    import InteractablePanel from './InteractablePanel.vue';
 
     export default {
         data() {
@@ -83,6 +60,7 @@
                             'value': 'lorem ipsum',
                             'type': 'text'
                         },
+                        'time': 5,
                         'options': [
                             {   
                                 'variant': 1,
@@ -129,12 +107,13 @@
                     },
                     {
                         'id': 3,
-                        'type': 'matching',
+                        'type': 'drag-drop-matching',
                         'task': {
                             'source': '',
                             'value': 'lorem ipsum',
                             'type': 'text'
                         },
+                        'time': 5,
                         'options': [
                             {   
                                 'variant': 1,
@@ -158,20 +137,53 @@
                     },
                     {
                         'id': 4,
-                        'type': 'sentence',
+                        'type': 'drag-drop-sentence',
                         'task': {
                             'source': '',
                             'value': 'lorem ipsum',
                             'type': 'text'
                         },
-                        'words': [
+                        'options': [
                             'big', 'small', 'fiction'
                         ],
                         'sentence': 'There was [empty] and [empty] elephant. But it is of course [empty] story'
                     },
+                    {
+                        'id': 1,
+                        'type': 'multiple-choice',
+                        'task': {
+                            'source': '',
+                            'value': 'lorem ipsum',
+                            'type': 'text'
+                        },
+                        'time': 5,
+                        'options': [
+                            {   
+                                'variant': 1,
+                                'type': 'text',
+                                'source': 'Laimon'
+                            },
+                            {
+                                'variant': 2,
+                                'type': 'audio',
+                                'source': 'http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3'
+                            },
+                            {
+                                'variant': 3,
+                                'type': 'text',
+                                'source': 'Banana'
+                            },
+                            {
+                                'variant': 4,
+                                'type': 'text',
+                                'source': 'Dsa'
+                            },
+                        ]
+                    },
                 ],
-                questionIndex: 0,
-                countDown: 7,
+                questionIndex: -1,
+                defaultCountDownTime: 20,
+                countDown: 20,
                 recievedAnswers: {},
             }
         },
@@ -181,32 +193,41 @@
             }
         },
         methods: {
-            next(){
-                if(this.questionIndex == 3) return
+            startNextQuestion(){
+                if(this.questionIndex == this.questions.length) return
                 this.questionIndex += 1;
+                this.restartTimer(this.questions[this.questionIndex].time);
             },
             countDownTimer() {
                 if(this.countDown > 0) {
                     setTimeout(() => {
                         this.countDown -= 1
                         this.countDownTimer()
-                    }, 1000)
+                      }, 1000)
                 }
                 else{
-                    this.next();
-                    this.countDown = 7;
-                    this.countDownTimer();
+                    this.startNextQuestion();
                 }
+            },
+            restartTimer(seconds){
+
+                if( !seconds )
+                    seconds = this.defaultCountDownTime
+
+                this.countDown = seconds;
+                this.countDownTimer();
+            }
+        },
+        computed: {
+            isQuizActive(){
+                return this.questionIndex < this.questions.length;
             }
         },
         created(){
-           this.countDownTimer()
+           this.startNextQuestion()
         },
         components: {
-            MultipleChoice,
-            MultipleAnswers,
-            DragDropMatching,
-            DragDropSentence
+            InteractablePanel,
         },
 
     }

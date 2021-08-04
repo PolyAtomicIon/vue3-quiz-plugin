@@ -67,7 +67,10 @@ export default {
   name: "DragDropSentence",
   extends: DragDropBase2,
   props: {
-    sentence: String,
+    sentence: {
+      type: String,
+      defauit: ''
+    },
   },
   data(){
     return {

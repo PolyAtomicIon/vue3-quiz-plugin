@@ -8,8 +8,16 @@ export default {
   },
   inject: ["recievedAnswers"],
   props: {
-    options: Array,
-    questionId: Number,
+    options: {
+      type: Array,
+      default(){
+        return new Array();
+      }
+    },
+    questionId: {
+      type: Number,
+      default: -1
+    },
   },
   data() {
     return {
@@ -67,7 +75,7 @@ export default {
       // create array with only one value
       this.answers[index] = [elementToBeSaved];
     },
-    addElementToOptions: function(element){
+    addElementToOptions: function(element){   
       this.optionsCopy.push(element)
     },
     removeFromArrayByValueReturnArray(items, value){
