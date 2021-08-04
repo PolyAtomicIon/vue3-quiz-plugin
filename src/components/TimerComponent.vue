@@ -38,8 +38,10 @@ export default {
     },
     methods: {
         countDownTimer() {
-            if(this.countDown <= 0)
+            if(this.countDown <= 0){
                 this.onTimerEnd();
+                return;
+            }
 
             this.timer = setTimeout(() => {
                 this.countDown -= 1

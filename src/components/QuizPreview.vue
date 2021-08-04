@@ -2,6 +2,7 @@
 
     <button
         class="submit-button"
+        @click="onQuizStart"
     >
         Start QUIZ
     </button>
@@ -10,7 +11,11 @@
 
 <script>
 export default {
-    
+    props: {
+        onQuizStart: {
+            type: Function,
+        }
+    }
 }
 </script>
 
