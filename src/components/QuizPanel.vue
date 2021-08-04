@@ -2,8 +2,8 @@
     <div class="wrapper">
 
         <timer-component
-            :isTimerReset="isTimerReset"
-            :timeToCountDown="timeToCountDown"
+            :iteration="questionIndex"
+            :secondsToCountDown="secondsToCountDown"
             :onTimerEnd="startNextQuestion"
         />
 
@@ -15,15 +15,17 @@
 
         <div class="interaction-panel">
             <transition-group name="slide-fade" mode="out-in">
-                <question-component
-                    :type="questions[questionIndex].task.type"
-                    :content="questions[questionIndex].task.content"
-                ></question-component>
-                <interactable-panel
-                    :question="questions[questionIndex]"  
-                        
+                <div
                     :key="questionIndex"
-                />
+                >
+                    <question-component
+                        :type="questions[questionIndex].task.type"
+                        :content="questions[questionIndex].task.content"
+                    />
+                    <interactable-panel
+                        :question="questions[questionIndex]"  
+                    />
+                </div>
             </transition-group>
         </div> 
 
@@ -82,6 +84,7 @@
                             'content': 'lorem ipsum',
                             'type': 'text'
                         },
+                        'time': 10,
                         'options': [
                             {   
                                 'variant': 1,
@@ -136,6 +139,7 @@
                             'content': 'lorem ipsum',
                             'type': 'text'
                         },
+                        'time': 12,
                         'options': [
                             'big', 'small', 'fiction'
                         ],
@@ -183,7 +187,7 @@
                     },
                 ],
                 questionIndex: -1,
-                timeToCountDown: 0,
+                secondsToCountDown: 0,
                 recievedAnswers: {},
                 isTimerReset: false
             }
@@ -196,11 +200,9 @@
         methods: {
             startNextQuestion(){
                 if(this.questionIndex == this.questions.length) return
-                
+
                 this.questionIndex += 1;
-                // this.restartTimer(this.questions[this.questionIndex].time);
-                this.isTimerReset = true;
-                this.timeToCountDown = this.questions[this.questionIndex].time;
+                this.secondsToCountDown = this.questions[this.questionIndex].time;
             },
         },
         computed: {

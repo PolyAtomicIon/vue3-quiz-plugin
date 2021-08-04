@@ -9,12 +9,13 @@ export default {
         return {
             countDown: 0,
             defaultCountDownTime: 20,
+            timer: null
         }
     },
     props: {
-        isTimerReset: {
-            type: Boolean,
-            default: false,
+        iteration: {
+            type: Number,
+            default: 0,
         },
         secondsToCountDown: {
             type: Number,
@@ -24,25 +25,34 @@ export default {
             type: Function
         }
     },
+    watch: { 
+        // if new iteration should start
+        iteration(newVal){
+            if(newVal){
+                this.startTimer(this.secondsToCountDown)
+            }
+        },
+    },
     created(){
-        console.log("TIMER STARTED WITH VALUES ", this.timeToCountDown)
-        this.startTimer(this.secondsToCountDown)
+        this.startTimer(this.secondsToCountDown);
     },
     methods: {
         countDownTimer() {
-            if(this.countDown > 0 && !this.isTimerReset) {
-                setTimeout(() => {
-                    this.countDown -= 1
-                    this.countDownTimer()
-                    }, 1000)
-            }
-            else{
+            if(this.countDown <= 0)
                 this.onTimerEnd();
-            }
+
+            this.timer = setTimeout(() => {
+                this.countDown -= 1
+                this.countDownTimer()
+            }, 1000);
         },
         startTimer(seconds = this.defaultCountDownTime){
+            this.stopTimer()
             this.countDown = seconds;
             this.countDownTimer();
+        },
+        stopTimer(){
+            clearTimeout(this.timer);
         }
     },
 
