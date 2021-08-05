@@ -155,6 +155,9 @@ export default {
     background: blue;
   }
   
+  .list-group-item-wrong-choice {
+    background: red;
+  }
 
   .list-group-item:hover {
     background: green;

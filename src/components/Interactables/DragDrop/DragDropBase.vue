@@ -82,7 +82,7 @@ export default {
       console.log(answersArray);
       this.recievedAnswer.isCorrect = Utils.orderedArraysEqual(this.answer.answer, answersArray); 
       
-      setTimeout(() => this.reorderLabelsToShowRightAnswer(), 2000);
+      setTimeout(() => this.reorderLabelsToShowRightAnswer(), 1250);
     },
     answersToOnlyVariantArray(){
       return this.recievedAnswer.userInput.map((val) => {return val[0]?.variant});
@@ -92,34 +92,42 @@ export default {
 
       this.answer.answer.forEach( curVariant => {
         this.recievedAnswer.userInput.forEach( label => {
-          if( label[0]?.variant === curVariant )
+          if( label[0] && label[0]?.variant === curVariant )
             tempArr.push(label);
         } );
 
-        this.options.forEach( label => {
-          if( label[0]?.variant === curVariant )
-            tempArr.push(label);
+        this.optionsCopy.forEach( label => {
+          if( label?.variant === curVariant )
+            tempArr.push([label]);
         } );
       } )
 
       console.log("reoredered ", tempArr)
       this.unorderedUserInput = this.recievedAnswer.userInput
+      this.optionsCopy = []
       this.recievedAnswer.userInput = tempArr;
     },
     isLabelInRightPlace(label, index){
-      return this.answer.answer[index] === label.variant
+      return this.answer.answer[index] === label?.variant
     },
     labelStatusToClass(index){
-      let label = this.recievedAnswer.userInput[index][0]
-      if( this.unorderedUserInput )
-        label = this.unorderedUserInput[index][0]
+      let label = this.getOriginalLabelByIndex(index)
 
       let result = ''
       if( this.isSubmitted ){
         if( this.isLabelInRightPlace(label, index) )
           result += 'list-group-item-right-choice '
+        else if( !this.unorderedUserInput )
+          result += 'list-group-item-wrong-choice '
       }
       return result
+    },
+    getOriginalLabelByIndex(index){
+      let label = this.recievedAnswer.userInput[index][0]
+      if( this.unorderedUserInput )
+        label = this.unorderedUserInput[index][0]
+
+      return label
     }
   },
   computed: {

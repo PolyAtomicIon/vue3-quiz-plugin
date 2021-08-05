@@ -49,7 +49,10 @@
             >
               <template #item="{ element }" 
               >
-                <div class="list-group-item">
+                <div 
+                  class="list-group-item"
+                  :class="labelStatusToClass(word.index)"
+                >
                   {{ element.value }} </div>
               </template>
             </draggable>
@@ -172,6 +175,14 @@ export default {
     font-weight: bold;
     cursor: move;
     padding: 5px;
+  }
+
+  .list-group-item-right-choice {
+    background: blue;
+  }
+
+  .list-group-item-wrong-choice {
+    background: red;
   }
 
   .list-group-item:hover {
