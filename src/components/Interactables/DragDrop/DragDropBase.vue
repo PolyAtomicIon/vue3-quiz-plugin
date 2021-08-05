@@ -19,7 +19,8 @@ export default {
   data() {
     return {
       optionsCopy: [],
-      numberOfLabels: -1
+      numberOfLabels: -1,
+      unorderedUserInput: null
     };
   },
   created(){
@@ -81,7 +82,7 @@ export default {
       console.log(answersArray);
       this.recievedAnswer.isCorrect = Utils.orderedArraysEqual(this.answer.answer, answersArray); 
       
-      this.reorderLabelsToShowRightAnswer();
+      setTimeout(() => this.reorderLabelsToShowRightAnswer(), 2000);
     },
     answersToOnlyVariantArray(){
       return this.recievedAnswer.userInput.map((val) => {return val[0]?.variant});
@@ -102,12 +103,17 @@ export default {
       } )
 
       console.log("reoredered ", tempArr)
+      this.unorderedUserInput = this.recievedAnswer.userInput
       this.recievedAnswer.userInput = tempArr;
     },
     isLabelInRightPlace(label, index){
       return this.answer.answer[index] === label.variant
     },
-    labelStatusToClass(label, index){
+    labelStatusToClass(index){
+      let label = this.recievedAnswer.userInput[index][0]
+      if( this.unorderedUserInput )
+        label = this.unorderedUserInput[index][0]
+
       let result = ''
       if( this.isSubmitted ){
         if( this.isLabelInRightPlace(label, index) )

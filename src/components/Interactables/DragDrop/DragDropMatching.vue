@@ -45,7 +45,7 @@
             <template #item="{ element }">
               <div 
                 class="list-group-item"
-                :class="labelStatusToClass(element, Id - 1)"
+                :class="labelStatusToClass(Id - 1)"
               >
                 {{ element.value }} {{ element.variant }} {{Id}} </div>
             </template>
