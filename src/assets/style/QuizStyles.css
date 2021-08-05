@@ -1,0 +1,246 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* after Reset */
+
+.wrapper {
+    background-color: lightgray;
+    padding: 10px;
+    margin: 10px;
+    border: 1px;
+}
+
+.blue-background {
+    background-color: skyblue;
+}
+
+.slide-fade-enter-active {
+    transition: all 1s ease-out;
+}
+
+.slide-fade-leave-active {
+    transition: all 0   s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateX(50px);
+    opacity: 0;
+}
+
+.timer {
+    background: lightcoral
+}
+
+.question {
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+    border-radius: 5px;
+    height: 100px;
+    min-width: 250px;
+
+    padding: 20px;
+    margin: 10px;
+
+    border: solid 2px blue ;
+}
+
+.interaction-panel {
+    background: lightyellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px
+}
+
+.submit-button {
+    height: 36px;
+    width: 128px;
+    background: cornsilk;
+    border-radius: 5px;
+    box-shadow: rgba(255,0,0,0.25) 0px 1px 1px 1px;
+}
+
+/* Choosable */
+
+.choosableOption {
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+    border-radius: 5px;
+
+    height: 100px;
+    min-width: 100px;
+
+    padding: 20px;
+    margin: 10px;
+
+}
+
+.active {
+    /* border: 3px cyan solid; */
+    position: relative;
+    background: cyan;
+}
+
+.wrong-choice {
+    /* border: 3px red solid; */
+    background: red;
+
+}
+
+.right-choice {
+    /* border: 3px green solid; */
+    background: green;
+}
+
+/* MultipleBase */
+
+.interactable {
+    background: lightgreen;
+}
+
+/* DragDrop */
+
+.chosen-ticket {
+    background: darkorange !important;
+    opacity: 0;
+}
+.dragging-ticket {
+    background: darkred !important;
+    background-color: darkred !important;
+    opacity: 1 !important;
+    box-shadow: none !important;
+    border: 2px solid black;
+}
+.ghost-ticket {
+} 
+
+
+.row {
+    background: red;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .column {
+    background: lightcoral;
+    width: 350px;
+    padding: 5px
+  }
+
+  .options-group {
+    display: flex;
+    min-height: 96px;
+    background: indigo;
+  }
+
+  .options-group-item {
+    background: darksalmon;
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .options-group-item:hover {
+    background: darkseagreen;
+  }
+
+  .text-container {
+    padding: 20px;
+    margin: 10px;
+    background: orange;
+  }
+  .two-row {
+    display: flex;
+    justify-content: space-between;
+    background: lightcyan;
+    margin: 2px 0px;
+  }
+
+  .list-group {
+    background: chartreuse;
+    min-height: 64px;
+    max-height: 96px;
+    width: 200px;
+    margin: 10px
+  }
+
+  .list-group-item {
+    background: lightseagreen;
+    margin: 5px;
+    border: solid 2px rgb(78, 75, 75);
+    text-align: center;
+    font-weight: bold;
+    cursor: move;
+    padding: 20px;
+  }
+
+  .list-group-item-right-choice {
+    background: blue;
+  }
+  
+  .list-group-item-wrong-choice {
+    background: red;
+  }
+
+  .list-group-item:hover {
+    background: white;
+  }
+
+  .paragraph {
+    display: flex;
+    max-width: 100%;
+    flex-flow: row wrap;
+    margin: 20px;
+    background: khaki;
+  }

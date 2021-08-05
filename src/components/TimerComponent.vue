@@ -62,7 +62,4 @@ export default {
 </script>
 
 <style scoped>
-    .timer {
-        background: lightcoral
-    }
 </style>

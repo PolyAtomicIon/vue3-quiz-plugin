@@ -36,33 +36,4 @@ export default {
 </script>
 
 <style scoped>
-
-  .choosableOption {
-    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-
-    border-radius: 5px;
-
-    height: 100px;
-    min-width: 100px;
-
-    padding: 20px;
-    margin: 10px;
-
-  }
-
-  .question {
-      -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-      -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-      box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-
-      border-radius: 5px;
-      height: 100px;
-      min-width: 250px;
-
-      padding: 20px;
-      margin: 10px;
-  }
-
 </style>

@@ -53,9 +53,4 @@
 </script>
 
 <style scoped>
-
-    .interactable {
-        background: lightgreen;
-    }
-
 </style>
