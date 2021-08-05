@@ -49,12 +49,4 @@
 
 <style scoped>
 
-    .interactable {
-        background: lightgreen;
-    }
-
-    .active {
-        border: 3px cyan solid;
-    }
-
 </style>

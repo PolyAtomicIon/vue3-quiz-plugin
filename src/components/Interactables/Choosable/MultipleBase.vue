@@ -53,4 +53,13 @@
         border: 3px cyan solid;
     }
 
+    .wrong-choice {
+        border: 3px red solid;
+    }
+ 
+    .right-choice {
+        border: 3px green solid;
+    }
+
+
 </style>
