@@ -9,14 +9,15 @@
             :source="item.source"
 
             :class="{ active: isOptionChosen(item.variant), }"
-        />
+        >
+        </choosable-option-label>
     </div>
 
 </template>
 
 <script>
 
-    import ChoosableBase from './ChoosableBase.vue'
+    import ChoosableBase from './MultipleBase.vue'
 
     export default {
 

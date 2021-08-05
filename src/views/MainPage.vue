@@ -3,7 +3,7 @@
 
     <quiz-preview
       v-if="!isQuizStarted"
-      :onQuizStart="startQuiz"
+      :on-quiz-start="startQuiz"
     ></quiz-preview>
 
     <quiz-panel 
@@ -12,12 +12,12 @@
 
       :questions="questions" 
       :answers="answers"
-      :onQuizEnd="endQuiz"
+      :on-quiz-end="endQuiz"
     /> 
 
     <quiz-result
       v-else
-      :recievedAnswers="recievedAnswers"
+      :recieved-answers="recievedAnswers"
     ></quiz-result>
 
   </div>
@@ -40,7 +40,7 @@ export default {
                   'content': 'lorem ipsum',
                   'type': 'text'
               },
-              'time': 5,
+              'time': 20,
               'options': [
                   {   
                       'variant': 1,
@@ -92,7 +92,7 @@ export default {
                   'content': 'lorem ipsum',
                   'type': 'text'
               },
-              'time': 5,
+              'time': 20,
               'options': [
                   {   
                       'variant': 1,
@@ -134,7 +134,7 @@ export default {
                   'content': 'lorem ipsum',
                   'type': 'text'
               },
-              'time': 5,
+              'time': 20,
               'options': [
                   {   
                       'variant': 1,
@@ -165,7 +165,7 @@ export default {
                   'content': 'lorem ipsum',
                   'type': 'text'
               },
-              'time': 45,
+              'time': 20,
           },
       ],
       answers: {},

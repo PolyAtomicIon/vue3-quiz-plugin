@@ -3,8 +3,8 @@
 
         <timer-component
             :iteration="questionIndex"
-            :secondsToCountDown="secondsToCountDown"
-            :onTimerEnd="startNextQuestionOrEndQuiz"
+            :seconds-to-count-down="secondsToCountDown"
+            :on-timer-end="checkAnswer"
         />
 
         <!-- demo, for checking state of answers -->
