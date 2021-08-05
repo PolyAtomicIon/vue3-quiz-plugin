@@ -43,8 +43,11 @@
             :disabled="isSubmitted"
           >
             <template #item="{ element }">
-              <div class="list-group-item">
-                {{ element.value }} </div>
+              <div 
+                class="list-group-item"
+                :class="labelStatusToClass(element, Id - 1)"
+              >
+                {{ element.value }} {{ element.variant }} {{Id}} </div>
             </template>
           </draggable>
 
@@ -147,6 +150,11 @@ export default {
     cursor: move;
     padding: 20px;
   }
+
+  .list-group-item-right-choice {
+    background: blue;
+  }
+  
 
   .list-group-item:hover {
     background: green;

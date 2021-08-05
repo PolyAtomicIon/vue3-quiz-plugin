@@ -90,14 +90,30 @@ export default {
       let tempArr = []
 
       this.answer.answer.forEach( curVariant => {
-        for(let j = 0; j < this.numberOfLabels; j++){
-          let label = this.recievedAnswer.userInput[j][0];
-          if( label?.variant === curVariant )
-            tempArr.push([label]);
-        }
+        this.recievedAnswer.userInput.forEach( label => {
+          if( label[0]?.variant === curVariant )
+            tempArr.push(label);
+        } );
+
+        this.options.forEach( label => {
+          if( label[0]?.variant === curVariant )
+            tempArr.push(label);
+        } );
       } )
 
+      console.log("reoredered ", tempArr)
       this.recievedAnswer.userInput = tempArr;
+    },
+    isLabelInRightPlace(label, index){
+      return this.answer.answer[index] === label.variant
+    },
+    labelStatusToClass(label, index){
+      let result = ''
+      if( this.isSubmitted ){
+        if( this.isLabelInRightPlace(label, index) )
+          result += 'list-group-item-right-choice '
+      }
+      return result
     }
   },
   computed: {
