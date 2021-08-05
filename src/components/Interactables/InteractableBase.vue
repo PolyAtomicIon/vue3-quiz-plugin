@@ -11,6 +11,7 @@
         },
         inject: ['showAnswers', 'recievedAnswers'],
         created() {
+            this.showAnswers.value[this.questionId] = false
             this.recievedAnswers.value[this.questionId] = new RecievedAnswer();
         },
         props: {
@@ -26,7 +27,7 @@
         watch: {
             showAnswers: {
                 handler(){
-                    if(this.isSubmitted()){
+                    if(this.isSubmitted){
                         this.checkAnswers();
                         this.submitResult();
                     }
@@ -37,15 +38,15 @@
         setup() {
         },
         methods: {
-            isSubmitted(){
-                return this.showAnswers.value[this.questionId] 
-            },
             submitResult(){
                 this.recievedAnswers.value[this.questionId].setUserInputAsArray(this.userInput)
                 this.recievedAnswers.value[this.questionId].setResult(this.result)
-            }
+            },
         },
         computed: {
+            isSubmitted(){
+                return this.showAnswers.value[this.questionId] 
+            },
         }
     }
 
