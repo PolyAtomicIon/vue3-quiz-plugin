@@ -132,43 +132,5 @@
 </script>
 
 <style scoped>
-
-    .interaction-panel {
-        background: lightyellow;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 20px
-    }
-
-    .question {
-        border: solid 2px blue ;
-    }
-
-    .blue-background {
-        background: lightskyblue;
-    }
-
-    .slide-fade-enter-active {
-        transition: all 1s ease-out;
-    }
-
-    .slide-fade-leave-active {
-        transition: all 0   s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-    }
-
-    .slide-fade-enter-from,
-    .slide-fade-leave-to {
-        transform: translateX(50px);
-        opacity: 0;
-    }
-
-    .submit-button {
-        height: 36px;
-        width: 128px;
-        background: cornsilk;
-        border-radius: 5px;
-        box-shadow: rgba(255,0,0,0.25) 0px 1px 1px 1px;
-    }
-
+    @import "../assets/style/QuizStyles.css";
 </style>

@@ -37,13 +37,4 @@
 </script>
 
 <style scoped>
-
-    .interactable {
-        background: lightgreen;
-    }
-
-    .active {
-        border: 3px red solid;
-    }
-
 </style>
