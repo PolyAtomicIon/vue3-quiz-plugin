@@ -2,6 +2,7 @@
 
     import ChoosableOptionLabel from './ChoosableOptionLabel.vue'
     import InteractableBase from '../InteractableBase.vue'
+    import * as Utils from '../../../Utils.js'
 
     export default {
         extends: InteractableBase,
@@ -13,8 +14,6 @@
             options: Array,
         },      
         created() {
-            // init array to not have troubles.
-            this.recievedAnswers.value[this.questionId] = [];
         },
         components: {
             ChoosableOptionLabel
@@ -22,20 +21,30 @@
         setup() {
         },
         methods: {
-            onOptionLabelChosen(variant){
-                if( !this.isOptionChosen(variant) )  
-                    this.recievedAnswers.value[this.questionId].push(variant);
-                else
-                    this.recievedAnswers.value[this.questionId] = this.removeFromArrayByValueReturnArray(this.recievedAnswers.value[this.questionId], variant)
-            },
             isOptionChosen(variant){
-                if( !(this.questionId in this.recievedAnswers.value) )
-                    return false
-                return this.recievedAnswers.value[this.questionId].includes(variant);
+                return this.recievedAnswer.userInput.includes(variant);
             },
-            removeFromArrayByValueReturnArray(items, value){
-                return items.filter(item => item !== value)
-            }
+            isVariantInAnswer(variant){
+                return this.answer.answer.includes(variant)
+            },
+            labelStatusToClass(variant){
+                let result = '';
+                
+                if( this.isOptionChosen(variant) )
+                    result += ' active'
+
+                if( this.isSubmitted ){
+                    if( this.isVariantInAnswer(variant) )
+                        result += ' right-choice'
+                    else if( this.isOptionChosen(variant) )
+                        result += ' wrong-choice'
+                }
+                
+                return result
+            },
+            checkAnswers(){
+                this.recievedAnswer.isCorrect = Utils.arraysEqual(this.answer.answer, this.recievedAnswer.userInput) 
+            },
         },
         computed: {
         }
@@ -48,18 +57,5 @@
     .interactable {
         background: lightgreen;
     }
-
-    .active {
-        border: 3px cyan solid;
-    }
-
-    .wrong-choice {
-        border: 3px red solid;
-    }
- 
-    .right-choice {
-        border: 3px green solid;
-    }
-
 
 </style>

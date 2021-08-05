@@ -40,23 +40,36 @@ export default {
 </script>
 
 <style scoped>
-.choosableOption {
-  -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-  -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  .choosableOption {
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 
-  border-radius: 5px;
+    border-radius: 5px;
 
-  height: 100px;
-  min-width: 100px;
+    height: 100px;
+    min-width: 100px;
 
-  padding: 20px;
-  margin: 10px;
+    padding: 20px;
+    margin: 10px;
 
-}
+  }
 
-.active {
-    border: 3px solid red;
-}
+  .active {
+    /* border: 3px cyan solid; */
+    position: relative;
+    background: cyan;
+  }
+
+  .wrong-choice {
+    /* border: 3px red solid; */
+    background: red;
+
+  }
+
+  .right-choice {
+    /* border: 3px green solid; */
+    background: green;
+  }
 
 </style>

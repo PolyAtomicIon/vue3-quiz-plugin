@@ -5,12 +5,17 @@
             :iteration="questionIndex"
             :seconds-to-count-down="secondsToCountDown"
             :on-timer-end="checkAnswer"
+            v-show="!showAnswers[questionIndex + 1]"
         ></timer-component>
 
         <!-- demo, for checking state of answers -->
         <div class="wrapper blue-background">
-            Question id {{ questionIndex+1 }} is chosen 
-            {{recievedAnswers[questionIndex+1]}}
+            Question id {{ questionIndex+1 }} is Correct ->
+            {{recievedAnswers[questionIndex+1]?.isCorrect}}
+            <br/>
+            User Input {{recievedAnswers[questionIndex+1]?.userInput}}
+            <br/>
+            Answer: {{answers[questionIndex]?.answer}}
         </div>
 
         <div class="interaction-panel">

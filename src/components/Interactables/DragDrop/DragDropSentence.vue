@@ -10,10 +10,11 @@
           v-bind="dragOptions"
           group="people"
           itemKey="name"
+          :disabled="isSubmitted"
         >
           <template #item="{ element }">
             <div class="options-group-item">
-              {{ element }}
+              {{ element.value }}
             </div>
           </template>
         </draggable>
@@ -39,16 +40,21 @@
             <draggable
               v-else
               class="list-group"
-              :list="answers[word.index]"
+              :list="recievedAnswer.userInput[word.index]"
               :move="isOptionDroppable"
               v-bind="dragOptions"
               group="people"
-              @change="[checkAndCleanUpDraggables, updateAnswers]"
+              @change="[checkAndCleanUpDraggables]"
               itemKey="name"
+              :disabled="isSubmitted"
             >
-              <template #item="{ element, index }">
-                <div class="list-group-item">
-                  {{ element }} {{ index }}</div>
+              <template #item="{ element }" 
+              >
+                <div 
+                  class="list-group-item"
+                  :class="labelStatusToClass(word.index)"
+                >
+                  {{ element.value }} </div>
               </template>
             </draggable>
 
@@ -74,7 +80,7 @@ export default {
   },
   data(){
     return {
-      processedSentece: []
+      processedSentece: [],
     }
   },
   created(){
@@ -87,12 +93,12 @@ export default {
         counter++;
       }
     
-    console.log(this.answers)
+    console.log(this.recievedAnswer.userInput)
   },
   methods: {
     isEmpty(word){
       return typeof word === 'object' && word !== null
-    }
+    },
   },
 }
 </script>
@@ -130,7 +136,7 @@ export default {
 
   .chosen-ticket {
     background: darkorange !important;
-    opacity: 1;
+    opacity: 0;
   }
   .dragging-ticket {
     background: darkred !important;
@@ -170,6 +176,14 @@ export default {
     font-weight: bold;
     cursor: move;
     padding: 5px;
+  }
+
+  .list-group-item-right-choice {
+    background: blue;
+  }
+
+  .list-group-item-wrong-choice {
+    background: red;
   }
 
   .list-group-item:hover {

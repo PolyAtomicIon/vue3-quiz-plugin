@@ -3,7 +3,7 @@
     <div class="interactable">
         <input 
             type="text" 
-            v-model="recievedAnswers.value[questionId]" 
+            v-model="recievedAnswer.userInput" 
         />
     </div>
 
@@ -11,6 +11,7 @@
 
 <script>
     import InteractableBase from './InteractableBase.vue';
+    import * as Utils from '../../Utils.js'
 
     export default {
         extends: InteractableBase,
@@ -19,13 +20,14 @@
             }
         },
         created() {
-            this.recievedAnswers.value[this.questionId] = '';
+            this.recievedAnswer.userInput = '';
         },
         setup() {
         },
         methods: {
             checkAnswers(){
-                console.log("CheckAnswers 23")
+                this.recievedAnswer.setUserInputAsArray(this.recievedAnswer.userInput)
+                this.recievedAnswer.isCorrect = Utils.arraysEqual(this.answer.answer, this.recievedAnswer.userInput) 
             },
         },
         computed: {

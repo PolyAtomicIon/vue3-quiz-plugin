@@ -1,11 +1,17 @@
 
 <script>
+    import {RecievedAnswer} from './RecievedAnswer.js'
+
     export default {
         data(){
             return {
+                recievedAnswer: new RecievedAnswer(),
             }
         },
         inject: ['showAnswers', 'recievedAnswers'],
+        created() {
+            this.showAnswers.value[this.questionId] = false
+        },
         props: {
             questionId: {
                 type: Number,
@@ -19,23 +25,25 @@
         watch: {
             showAnswers: {
                 handler(){
-                    if(this.isSubmitted()){
+                    if(this.isSubmitted){
                         this.checkAnswers();
+                        this.submitResult();
                     }
                 },
                 deep: true
             }
         },
-        created() {
-        },
         setup() {
         },
         methods: {
-            isSubmitted(){
-                return this.showAnswers.value[this.questionId] 
-            }
+            submitResult(){
+                this.recievedAnswers.value[this.questionId] = this.recievedAnswer
+            },
         },
         computed: {
+            isSubmitted(){
+                return this.showAnswers.value[this.questionId] 
+            },
         }
     }
 

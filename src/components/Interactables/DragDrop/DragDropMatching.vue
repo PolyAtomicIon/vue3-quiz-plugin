@@ -10,6 +10,7 @@
           v-bind="dragOptions"
           group="people"
           itemKey="name"
+          :disabled="isSubmitted"
         >
           <template #item="{ element, index }">
             <div class="options-group-item">
@@ -33,16 +34,20 @@
 
           <draggable
             class="list-group"
-            :list="answers[Id-1]"
+            :list="recievedAnswer.userInput[Id-1]"
             :move="isOptionDroppable"
             v-bind="dragOptions"
             group="people"
-            @change="[checkAndCleanUpDraggables, updateAnswers]"
+            @change="[checkAndCleanUpDraggables]"
             itemKey="name"
+            :disabled="isSubmitted"
           >
-            <template #item="{ element, index }">
-              <div class="list-group-item">
-                {{ element.value }} {{ index }}</div>
+            <template #item="{ element }">
+              <div 
+                class="list-group-item"
+                :class="labelStatusToClass(Id - 1)"
+              >
+                {{ element.value }} {{ element.variant }} {{Id}} </div>
             </template>
           </draggable>
 
@@ -64,6 +69,8 @@ export default {
       type: Array,
       default: () => [],
     }
+  },
+  methods: {
   }
 }
 </script>
@@ -101,7 +108,7 @@ export default {
 
   .chosen-ticket {
     background: darkorange !important;
-    opacity: 1;
+    opacity: 0;
   }
   .dragging-ticket {
     background: darkred !important;
@@ -142,6 +149,14 @@ export default {
     font-weight: bold;
     cursor: move;
     padding: 20px;
+  }
+
+  .list-group-item-right-choice {
+    background: blue;
+  }
+  
+  .list-group-item-wrong-choice {
+    background: red;
   }
 
   .list-group-item:hover {

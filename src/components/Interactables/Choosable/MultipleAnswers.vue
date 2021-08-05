@@ -7,8 +7,8 @@
             @click="onOptionLabelChosen(item.variant)"
             :type="item.type"
             :source="item.source"
-
-            :class="{ active: isOptionChosen(item.variant), }"
+            :disabled="isSubmitted"
+            :class="labelStatusToClass(item.variant)"
         >
         </choosable-option-label>
     </div>
@@ -28,14 +28,11 @@
         setup() {
         },
         methods: {
-            checkAnswers(){
-                console.log("CheckAnswers 23")
-            },
             onOptionLabelChosen(variant){
                 if( !this.isOptionChosen(variant) )  
-                    this.recievedAnswers.value[this.questionId].push(variant);
+                    this.recievedAnswer.userInput.push(variant);
                 else
-                    this.recievedAnswers.value[this.questionId] = this.removeFromArrayByValueReturnArray(this.recievedAnswers.value[this.questionId], variant)
+                    this.recievedAnswer.userInput = this.removeFromArrayByValueReturnArray(this.recievedAnswer.userInput, variant)
             },
             removeFromArrayByValueReturnArray(items, value){
                 return items.filter(item => item !== value)
