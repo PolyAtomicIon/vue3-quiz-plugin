@@ -46,6 +46,7 @@
               group="people"
               @change="[checkAndCleanUpDraggables]"
               itemKey="name"
+              :disabled="isSubmitted"
             >
               <template #item="{ element }" 
               >
