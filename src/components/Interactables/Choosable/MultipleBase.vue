@@ -39,7 +39,6 @@
                         result += ' wrong-choice'
                 }
                 
-                console.log(result)
                 return result
             }
         },

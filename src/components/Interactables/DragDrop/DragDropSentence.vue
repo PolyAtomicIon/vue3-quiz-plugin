@@ -10,10 +10,11 @@
           v-bind="dragOptions"
           group="people"
           itemKey="name"
+          :disabled="isSubmitted"
         >
           <template #item="{ element }">
             <div class="options-group-item">
-              {{ element }}
+              {{ element.value }}
             </div>
           </template>
         </draggable>
@@ -39,16 +40,17 @@
             <draggable
               v-else
               class="list-group"
-              :list="answers[word.index]"
+              :list="recievedAnswer.userInput[word.index]"
               :move="isOptionDroppable"
               v-bind="dragOptions"
               group="people"
-              @change="[checkAndCleanUpDraggables, updateAnswers]"
+              @change="[checkAndCleanUpDraggables]"
               itemKey="name"
             >
-              <template #item="{ element, index }">
+              <template #item="{ element }" 
+              >
                 <div class="list-group-item">
-                  {{ element }} {{ index }}</div>
+                  {{ element.value }} </div>
               </template>
             </draggable>
 
@@ -74,7 +76,7 @@ export default {
   },
   data(){
     return {
-      processedSentece: []
+      processedSentece: [],
     }
   },
   created(){
@@ -87,7 +89,7 @@ export default {
         counter++;
       }
     
-    console.log(this.answers)
+    console.log(this.recievedAnswer.userInput)
   },
   methods: {
     isEmpty(word){

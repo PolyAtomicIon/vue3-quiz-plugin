@@ -117,12 +117,23 @@ export default {
               'id': 4,
               'type': 'drag-drop-sentence',
               'task': {
-                  'content': 'lorem ipsum',
-                  'type': 'text'
+                'content': 'lorem ipsum',
+                'type': 'text'
               },
               'time': 12,
               'options': [
-                  'big', 'small', 'fiction'
+                {   
+                    'variant': 1,
+                    'value': 'Elephant'
+                },
+                {
+                    'variant': 2,
+                    'value': 'Pig'
+                },
+                {
+                    'variant': 3,
+                    'value': 'Dragon'
+                }
               ],
               'sentence': 'There was [empty] and [empty] elephant. But it is of course [empty] story'
           },
@@ -178,19 +189,11 @@ export default {
           },
           {
             'id': 3,
-            'answer': {
-                1: 1,
-                2: 3,
-                3: 2
-            }
+            'answer': [1, 2, 3]
           },
           {
             'id': 4,
-            'answer': {
-                1: 1,
-                2: 3,
-                3: 2
-            }
+            'answer': [1, 2, 3]
           },
           {
               'id': 5,

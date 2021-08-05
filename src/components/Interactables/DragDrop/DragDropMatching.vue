@@ -10,6 +10,7 @@
           v-bind="dragOptions"
           group="people"
           itemKey="name"
+          :disabled="isSubmitted"
         >
           <template #item="{ element, index }">
             <div class="options-group-item">
@@ -33,12 +34,13 @@
 
           <draggable
             class="list-group"
-            :list="answers[Id-1]"
+            :list="recievedAnswer.userInput[Id-1]"
             :move="isOptionDroppable"
             v-bind="dragOptions"
             group="people"
-            @change="[checkAndCleanUpDraggables, updateAnswers]"
+            @change="[checkAndCleanUpDraggables]"
             itemKey="name"
+            :disabled="isSubmitted"
           >
             <template #item="{ element, index }">
               <div class="list-group-item">
@@ -64,6 +66,8 @@ export default {
       type: Array,
       default: () => [],
     }
+  },
+  methods: {
   }
 }
 </script>

@@ -2,6 +2,7 @@
 <script>
 import draggable from "vuedraggable";
 import InteractableBase from '../InteractableBase.vue'
+import * as Utils from '../../../Utils.js'
 
 export default {
   name: "DragDropBase2",
@@ -18,7 +19,6 @@ export default {
   data() {
     return {
       optionsCopy: [],
-      answers: [],
       numberOfLabels: -1
     };
   },
@@ -26,13 +26,9 @@ export default {
     // create Arrays for every option (label to match)
     this.optionsCopy = this.options;
     this.numberOfLabels = this.options.length;
-    this.answers = Array.from(Array(this.numberOfLabels), () => new Array())
+    this.recievedAnswer.userInput = Array.from(Array(this.numberOfLabels), () => new Array())
   },
   methods: {
-    
-    checkAnswers(){
-      console.log("CheckAnswers 23")
-    },
     log: function(evt) {
       window.console.log(evt);
     },
@@ -61,18 +57,18 @@ export default {
       const elementToBeSaved = evt.added.element;
 
       for(let i = 0; i < this.numberOfLabels; i++){
-        if(this.answers[i].length > 1) {
+        if(this.recievedAnswer.userInput[i].length > 1) {
           this.swapLabels(i, elementToBeSaved);
         }
       }
     },
     swapLabels: function(index, elementToBeSaved){
       // there will be only 2 elements in array, guarantee
-      const element = this.removeFromArrayByValueReturnArray(this.answers[index], elementToBeSaved)[0];
+      const element = this.removeFromArrayByValueReturnArray(this.recievedAnswer.userInput[index], elementToBeSaved)[0];
       this.addElementToOptions(element);
 
       // create array with only one value
-      this.answers[index] = [elementToBeSaved];
+      this.recievedAnswer.userInput[index] = [elementToBeSaved];
     },
     addElementToOptions: function(element){   
       this.optionsCopy.push(element)
@@ -80,10 +76,14 @@ export default {
     removeFromArrayByValueReturnArray(items, value){
       return items.filter(item => item !== value)
     },
-    updateAnswers(){
-      this.recievedAnswers.value[this.questionId] = this.answers;
+    checkAnswers(){
+      let answersArray = this.answersToOnlyVariantArray();
+      console.log(answersArray);
+      this.recievedAnswer.isCorrect = Utils.orderedArraysEqual(this.answer.answer, answersArray); 
+    },
+    answersToOnlyVariantArray(){
+      return this.recievedAnswer.userInput.map((val) => {return val[0]?.variant});
     }
-
   },
   computed: {
     dragOptions() {
