@@ -1,5 +1,28 @@
 # vue3-quiz-plugin
 
+Main component -> QuizPanel
+Accepts props:
+- questions
+- answers (should be encrypted for future)
+- onQuizEnd function -> returns recieved Answers -> has Object of Class RecievedAnswer
+
+About QuizPlugin:
+- provides:
+    - reviewedAnswers:
+        - saves userInput, correctness of user's answers, the final result
+    - showAnswers
+        - watches for change in showAnswers, if changed stop Timer and checkAnswers and showsRightAnswer
+
+Quiz Plugin -> calls InteractionPanel
+InteractionPanel:
+    - renders different types of question by question.type
+    - all different types extend InteractionBase
+        - InteractionBase has common props and functions, initializers for all question types
+
+DragDrop 
+    That complicated shit
+
+
 ## Project setup
 ```
 npm install
