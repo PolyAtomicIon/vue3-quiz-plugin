@@ -36,8 +36,8 @@ export default {
               'id': 1,
               'type': 'multiple-choice',
               'task': {
-                  'content': 'lorem ipsum',
-                  'type': 'text'
+                  'content': 'http://soundbible.com/mp3/Air Plane Ding-SoundBible.com-496729130.mp3',
+                  'type': 'audio'
               },
               'time': 20,
               'options': [
