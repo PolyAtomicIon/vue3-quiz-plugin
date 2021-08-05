@@ -80,9 +80,24 @@ export default {
       let answersArray = this.answersToOnlyVariantArray();
       console.log(answersArray);
       this.recievedAnswer.isCorrect = Utils.orderedArraysEqual(this.answer.answer, answersArray); 
+      
+      this.reorderLabelsToShowRightAnswer();
     },
     answersToOnlyVariantArray(){
       return this.recievedAnswer.userInput.map((val) => {return val[0]?.variant});
+    },
+    reorderLabelsToShowRightAnswer(){
+      let tempArr = []
+
+      this.answer.answer.forEach( curVariant => {
+        for(let j = 0; j < this.numberOfLabels; j++){
+          let label = this.recievedAnswer.userInput[j][0];
+          if( label?.variant === curVariant )
+            tempArr.push([label]);
+        }
+      } )
+
+      this.recievedAnswer.userInput = tempArr;
     }
   },
   computed: {
