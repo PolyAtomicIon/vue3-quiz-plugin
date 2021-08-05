@@ -29,13 +29,14 @@
         },
         methods: {
             checkAnswers(){
-                console.log("CheckAnswers 23")
+                console.log(this.userInput)
+                console.log(this.answer)
             },
             onOptionLabelChosen(variant){
                 if( !this.isOptionChosen(variant) )  
-                    this.recievedAnswers.value[this.questionId].push(variant);
+                    this.userInput.push(variant);
                 else
-                    this.recievedAnswers.value[this.questionId] = this.removeFromArrayByValueReturnArray(this.recievedAnswers.value[this.questionId], variant)
+                    this.userInput = this.removeFromArrayByValueReturnArray(this.userInput, variant)
             },
             removeFromArrayByValueReturnArray(items, value){
                 return items.filter(item => item !== value)

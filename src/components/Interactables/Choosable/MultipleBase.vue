@@ -13,8 +13,7 @@
             options: Array,
         },      
         created() {
-            // init array to not have troubles.
-            this.recievedAnswers.value[this.questionId] = [];
+            this.userInput = []
         },
         components: {
             ChoosableOptionLabel
@@ -22,20 +21,9 @@
         setup() {
         },
         methods: {
-            onOptionLabelChosen(variant){
-                if( !this.isOptionChosen(variant) )  
-                    this.recievedAnswers.value[this.questionId].push(variant);
-                else
-                    this.recievedAnswers.value[this.questionId] = this.removeFromArrayByValueReturnArray(this.recievedAnswers.value[this.questionId], variant)
-            },
             isOptionChosen(variant){
-                if( !(this.questionId in this.recievedAnswers.value) )
-                    return false
-                return this.recievedAnswers.value[this.questionId].includes(variant);
+                return this.userInput.includes(variant);
             },
-            removeFromArrayByValueReturnArray(items, value){
-                return items.filter(item => item !== value)
-            }
         },
         computed: {
         }
@@ -48,18 +36,5 @@
     .interactable {
         background: lightgreen;
     }
-
-    .active {
-        border: 3px cyan solid;
-    }
-
-    .wrong-choice {
-        border: 3px red solid;
-    }
- 
-    .right-choice {
-        border: 3px green solid;
-    }
-
 
 </style>

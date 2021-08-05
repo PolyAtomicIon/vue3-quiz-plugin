@@ -33,9 +33,10 @@
         methods: {
             checkAnswers(){
                 console.log("CheckAnswers 23")
+                console.log(this.answer)
             },
             onOptionLabelChosen(variant){
-                this.recievedAnswers.value[this.questionId] = [variant];
+                this.userInput = [variant];
             },
         },
         computed: {

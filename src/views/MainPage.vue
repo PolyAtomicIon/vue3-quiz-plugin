@@ -7,13 +7,12 @@
     ></quiz-preview>
 
     <quiz-panel 
-
       v-else-if="isQuizStarted && !isQuizEnded"
 
       :questions="questions" 
       :answers="answers"
       :on-quiz-end="endQuiz"
-    /> 
+    ></quiz-panel> 
 
     <quiz-result
       v-else
@@ -168,7 +167,40 @@ export default {
               'time': 20,
           },
       ],
-      answers: {},
+      answers: [
+          {
+            'id': 1,
+            'answer': 1
+          },
+          {
+            'id': 2,
+            'answer': [1, 3]
+          },
+          {
+            'id': 3,
+            'answer': {
+                1: 1,
+                2: 3,
+                3: 2
+            }
+          },
+          {
+            'id': 4,
+            'answer': {
+                1: 1,
+                2: 3,
+                3: 2
+            }
+          },
+          {
+              'id': 5,
+              'answer': 2
+          },
+          {
+              'id': 6,
+              'answer': 'DosM'
+          },
+      ],
       recievedAnswers: null,
       isQuizStarted: false,
       isQuizEnded: false,
