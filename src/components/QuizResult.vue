@@ -10,9 +10,7 @@ export default {
     props: {
         recievedAnswers: {
             type: Object,
-            default(){
-                return new Object;
-            }
+            default: () => ({})
         },
     }
 }

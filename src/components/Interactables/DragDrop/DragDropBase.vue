@@ -12,9 +12,7 @@ export default {
   props: {
     options: {
       type: Array,
-      default(){
-        return new Array();
-      }
+      default: () => [],
     },
   },
   data() {

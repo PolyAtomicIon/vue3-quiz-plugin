@@ -24,6 +24,7 @@
                     ></question-component>
                     <interactable-panel
                         :question="questions[questionIndex]"  
+                        :answer="answers[questionIndex]"
                     ></interactable-panel>
                 </div>
             </transition-group>
@@ -70,6 +71,12 @@
                 type: Function
             },
             questions: {
+                type: Array,
+                default() {
+                    return new Array();
+                }
+            },
+            answers: {
                 type: Array,
                 default() {
                     return new Array();

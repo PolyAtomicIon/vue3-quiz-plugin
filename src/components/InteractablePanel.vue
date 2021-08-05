@@ -11,10 +11,12 @@ export default {
   props: {
       question: {
         type: Object,
-        default() {
-            return {}
-        }
-      }
+        default: () => ({})
+      },
+      answer: {
+        type: Object,
+        default: () => ({})
+      },
   },
   components: {
     MultipleChoice,
@@ -36,6 +38,8 @@ export default {
       h(
         resolveComponent(getInteractableName(props.question.type)), {
             questionId: props.question.id,
+            answer: props.answer,
+
             options: props.question.options,
             labelsToMatch: props.question.labelsToMatch,
             sentence: props.question.sentence,
