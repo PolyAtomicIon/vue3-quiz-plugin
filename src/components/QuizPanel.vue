@@ -5,6 +5,7 @@
             :iteration="questionIndex"
             :seconds-to-count-down="secondsToCountDown"
             :on-timer-end="checkAnswer"
+            v-show="!showAnswers[questionIndex + 1]"
         ></timer-component>
 
         <!-- demo, for checking state of answers -->

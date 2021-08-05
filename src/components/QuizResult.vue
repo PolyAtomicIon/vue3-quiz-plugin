@@ -1,5 +1,14 @@
 <template>
-    <p>{{recievedAnswers}}</p>
+    <div>
+        <p 
+            v-for="(value, index) in recievedAnswers"
+            :key="index"
+            class="wrapper "
+        >
+            Question id {{ index }} is Correct ->
+            {{value?.isCorrect}}
+        </p>
+    </div>
 </template>
 
 <script>
