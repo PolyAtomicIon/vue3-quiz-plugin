@@ -1,8 +1,8 @@
 <script>
 import { h, resolveComponent } from "vue";
-import AudioLabel from "./Labels/AudioLabel.vue";
-import ImageLabel from "./Labels/ImageLabel.vue";
-import TextLabel from "./Labels/TextLabel.vue";
+import AudioLabel from "./Interactables/Labels/AudioLabel.vue";
+import ImageLabel from "./Interactables/Labels/ImageLabel.vue";
+import TextLabel from "./Interactables/Labels/TextLabel.vue";
 
 export default {
   props: {

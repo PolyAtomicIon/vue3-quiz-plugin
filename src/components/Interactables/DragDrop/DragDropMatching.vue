@@ -62,9 +62,7 @@ export default {
   props: {
     labelsToMatch: {
       type: Array,
-      default(){
-        return new Array();
-      }
+      default: () => [],
     }
   }
 }

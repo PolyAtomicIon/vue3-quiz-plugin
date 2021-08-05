@@ -1,20 +1,22 @@
 <script>
 import { h, resolveComponent } from "vue";
 
-import MultipleAnswers from './Interactables/MultipleAnswers.vue'
-import DragDropMatching from './Interactables/DragDropMatching.vue'
-import DragDropSentence from './Interactables/DragDropSentence.vue'
-import MultipleChoice from './Interactables/MultipleChoice.vue'
+import MultipleAnswers from './Interactables/Choosable/MultipleAnswers.vue'
+import MultipleChoice from './Interactables/Choosable/MultipleChoice.vue'
+import DragDropMatching from './Interactables/DragDrop/DragDropMatching.vue'
+import DragDropSentence from './Interactables/DragDrop/DragDropSentence.vue'
 import FillIn from './Interactables/FillIn.vue'
 
 export default {
   props: {
       question: {
         type: Object,
-        default() {
-            return {}
-        }
-      }
+        default: () => ({})
+      },
+      answer: {
+        type: Object,
+        default: () => ({})
+      },
   },
   components: {
     MultipleChoice,
@@ -36,6 +38,8 @@ export default {
       h(
         resolveComponent(getInteractableName(props.question.type)), {
             questionId: props.question.id,
+            answer: props.answer,
+
             options: props.question.options,
             labelsToMatch: props.question.labelsToMatch,
             sentence: props.question.sentence,

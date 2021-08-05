@@ -3,9 +3,9 @@
 
         <timer-component
             :iteration="questionIndex"
-            :secondsToCountDown="secondsToCountDown"
-            :onTimerEnd="startNextQuestionOrEndQuiz"
-        />
+            :seconds-to-count-down="secondsToCountDown"
+            :on-timer-end="checkAnswer"
+        ></timer-component>
 
         <!-- demo, for checking state of answers -->
         <div class="wrapper blue-background">
@@ -21,19 +21,29 @@
                     <question-component
                         :type="questions[questionIndex]?.task.type"
                         :content="questions[questionIndex]?.task.content"
-                    />
+                    ></question-component>
                     <interactable-panel
                         :question="questions[questionIndex]"  
-                    />
+                        :answer="answers[questionIndex]"
+                    ></interactable-panel>
                 </div>
             </transition-group>
         </div> 
 
         <button
-            @click="startNextQuestionOrEndQuiz"
+            v-if="!showAnswers[questionIndex + 1]"
+            @click="checkAnswer"
             class="submit-button"
         >
             Submit
+        </button>
+
+        <button
+            v-else
+            @click="startNextQuestionOrEndQuiz"
+            class="submit-button"
+        >
+            Next
         </button>
 
     </div>
@@ -53,6 +63,7 @@
                 questionIndex: -1,
                 secondsToCountDown: 0,
                 recievedAnswers: {},
+                showAnswers: {}
             }
         },
         props: {
@@ -64,11 +75,18 @@
                 default() {
                     return new Array();
                 }
+            },
+            answers: {
+                type: Array,
+                default() {
+                    return new Array();
+                }
             }
         },
         provide() {
             return {
                 recievedAnswers: computed(() => this.recievedAnswers),
+                showAnswers: computed(() => this.showAnswers),
             }
         },
         created(){
@@ -76,6 +94,9 @@
             this.startNextQuestionOrEndQuiz()
         },
         methods: {
+            checkAnswer(){
+                this.showAnswers[this.questionIndex + 1] = true
+            },
             startNextQuestionOrEndQuiz(){
 
                 if( this.questionIndex === this.questions.length )
