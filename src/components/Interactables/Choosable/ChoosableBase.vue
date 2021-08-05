@@ -1,23 +1,7 @@
-<template>
-    
-    <div class="interactable">
-        <choosable-option-label
-            v-for="item in options"
-            :key="item.variant"
-            @click="onOptionLabelChosen(item.variant)"
-            :type="item.type"
-            :source="item.source"
-
-            :class="{ active: isOptionChosen(item.variant), }"
-        />
-    </div>
-
-</template>
-
 <script>
 
-    import ChoosableOptionLabel from '../ChoosableOptionLabel.vue'
-    import InteractableBase from './InteractableBase.vue'
+    import ChoosableOptionLabel from './ChoosableOptionLabel.vue'
+    import InteractableBase from '../InteractableBase.vue'
 
     export default {
         extends: InteractableBase,
@@ -38,9 +22,6 @@
         setup() {
         },
         methods: {
-            checkAnswers(){
-                console.log("CheckAnswers 23")
-            },
             onOptionLabelChosen(variant){
                 if( !this.isOptionChosen(variant) )  
                     this.recievedAnswers.value[this.questionId].push(variant);

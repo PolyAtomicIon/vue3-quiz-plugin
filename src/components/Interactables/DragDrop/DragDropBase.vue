@@ -1,7 +1,7 @@
 
 <script>
 import draggable from "vuedraggable";
-import InteractableBase from './InteractableBase.vue'
+import InteractableBase from '../InteractableBase.vue'
 
 export default {
   name: "DragDropBase2",

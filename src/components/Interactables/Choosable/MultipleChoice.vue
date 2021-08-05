@@ -16,23 +16,16 @@
 
 <script>
 
-    import ChoosableOptionLabel from '../ChoosableOptionLabel.vue'
-    import InteractableBase from './InteractableBase.vue'
+    import ChoosableBase from './ChoosableBase.vue'
 
     export default {
 
-        extends: InteractableBase,
+        extends: ChoosableBase,
         data(){
             return {
             }
-        },
-        props: {
-            options: Array,
-        },      
+        },    
         created() {
-        },
-        components: {
-            ChoosableOptionLabel
         },
         setup() {
         },
@@ -43,11 +36,6 @@
             onOptionLabelChosen(variant){
                 this.recievedAnswers.value[this.questionId] = [variant];
             },
-            isOptionChosen(variant){
-                if( !(this.questionId in this.recievedAnswers.value) )
-                    return false
-                return this.recievedAnswers.value[this.questionId].includes(variant);
-            }
         },
         computed: {
         }
