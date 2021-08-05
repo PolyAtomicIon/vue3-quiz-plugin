@@ -18,6 +18,7 @@
 <script>
 
     import ChoosableBase from './MultipleBase.vue'
+    import * as Utils from '../../../Utils.js'
 
     export default {
         extends: ChoosableBase,
@@ -29,14 +30,15 @@
         },
         methods: {
             checkAnswers(){
-                console.log(this.userInput)
-                console.log(this.answer)
+                console.log(this.recievedAnswer.userInput)
+                console.log(this.answer.answer)
+                this.recievedAnswer.isCorrect = Utils.arraysEqual(this.answer.answer, this.recievedAnswer.userInput)
             },
             onOptionLabelChosen(variant){
                 if( !this.isOptionChosen(variant) )  
-                    this.userInput.push(variant);
+                    this.recievedAnswer.userInput.push(variant);
                 else
-                    this.userInput = this.removeFromArrayByValueReturnArray(this.userInput, variant)
+                    this.recievedAnswer.userInput = this.removeFromArrayByValueReturnArray(this.recievedAnswer.userInput, variant)
             },
             removeFromArrayByValueReturnArray(items, value){
                 return items.filter(item => item !== value)

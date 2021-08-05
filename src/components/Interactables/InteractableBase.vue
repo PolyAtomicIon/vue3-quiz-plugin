@@ -5,14 +5,12 @@
     export default {
         data(){
             return {
-                userInput: [],
-                result: [],
+                recievedAnswer: new RecievedAnswer(),
             }
         },
         inject: ['showAnswers', 'recievedAnswers'],
         created() {
             this.showAnswers.value[this.questionId] = false
-            this.recievedAnswers.value[this.questionId] = new RecievedAnswer();
         },
         props: {
             questionId: {
@@ -39,8 +37,7 @@
         },
         methods: {
             submitResult(){
-                this.recievedAnswers.value[this.questionId].setUserInputAsArray(this.userInput)
-                this.recievedAnswers.value[this.questionId].setResult(this.result)
+                this.recievedAnswers.value[this.questionId] = this.recievedAnswer
             },
         },
         computed: {

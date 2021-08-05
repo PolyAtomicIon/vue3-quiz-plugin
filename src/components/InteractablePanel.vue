@@ -7,6 +7,8 @@ import DragDropMatching from './Interactables/DragDrop/DragDropMatching.vue'
 import DragDropSentence from './Interactables/DragDrop/DragDropSentence.vue'
 import FillIn from './Interactables/FillIn.vue'
 
+import * as Utils from '../Utils.js'
+
 export default {
   props: {
       question: {
@@ -27,11 +29,8 @@ export default {
   },
   setup(props) {
 
-    const capitalize = ([firstLetter, ...restOfWord]) =>
-      firstLetter.toUpperCase() + restOfWord.join('')
-
     const getInteractableName = (stringToSplit, separator = '-') => {        
-        return stringToSplit.split(separator).map(capitalize).join('');
+        return stringToSplit.split(separator).map(Utils.capitalize).join('');
     };
 
     return () =>

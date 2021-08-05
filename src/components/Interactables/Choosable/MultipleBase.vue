@@ -13,7 +13,6 @@
             options: Array,
         },      
         created() {
-            this.userInput = []
         },
         components: {
             ChoosableOptionLabel
@@ -22,7 +21,7 @@
         },
         methods: {
             isOptionChosen(variant){
-                return this.userInput.includes(variant);
+                return this.recievedAnswer.userInput.includes(variant);
             },
         },
         computed: {
