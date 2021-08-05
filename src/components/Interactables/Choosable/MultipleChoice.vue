@@ -18,7 +18,6 @@
 <script>
 
     import ChoosableBase from './MultipleBase.vue'
-    import * as Utils from '../../../Utils.js'
 
     export default {
 
@@ -32,9 +31,6 @@
         setup() {
         },
         methods: {
-            checkAnswers(){
-                this.recievedAnswer.isCorrect =  Utils.arraysEqual(this.answer.answer, this.recievedAnswer.userInput) 
-            },
             onOptionLabelChosen(variant){
                 this.recievedAnswer.userInput = [variant];
             },

@@ -42,9 +42,9 @@
             itemKey="name"
             :disabled="isSubmitted"
           >
-            <template #item="{ element, index }">
+            <template #item="{ element }">
               <div class="list-group-item">
-                {{ element.value }} {{ index }}</div>
+                {{ element.value }} </div>
             </template>
           </draggable>
 

@@ -94,7 +94,7 @@ export default {
   methods: {
     isEmpty(word){
       return typeof word === 'object' && word !== null
-    }
+    },
   },
 }
 </script>

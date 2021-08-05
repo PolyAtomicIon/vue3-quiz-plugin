@@ -201,7 +201,7 @@ export default {
           },
           {
               'id': 6,
-              'answer': 'DosM'
+              'answer': ['DosM']
           },
       ],
       recievedAnswers: null,

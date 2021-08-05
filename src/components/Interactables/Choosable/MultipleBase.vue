@@ -2,6 +2,7 @@
 
     import ChoosableOptionLabel from './ChoosableOptionLabel.vue'
     import InteractableBase from '../InteractableBase.vue'
+    import * as Utils from '../../../Utils.js'
 
     export default {
         extends: InteractableBase,
@@ -40,7 +41,10 @@
                 }
                 
                 return result
-            }
+            },
+            checkAnswers(){
+                this.recievedAnswer.isCorrect = Utils.arraysEqual(this.answer.answer, this.recievedAnswer.userInput) 
+            },
         },
         computed: {
         }
