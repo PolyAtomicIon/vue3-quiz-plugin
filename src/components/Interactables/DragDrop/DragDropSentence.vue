@@ -136,7 +136,7 @@ export default {
 
   .chosen-ticket {
     background: darkorange !important;
-    opacity: 1;
+    opacity: 0;
   }
   .dragging-ticket {
     background: darkred !important;
