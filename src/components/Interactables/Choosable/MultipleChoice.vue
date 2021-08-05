@@ -8,7 +8,7 @@
             :type="item.type"
             :source="item.source"
             :disabled="isSubmitted"
-            :class="{ active: isOptionChosen(item.variant), }"
+            :class="labelStatusToClass(item.variant)"
         >
         </choosable-option-label>
     </div>

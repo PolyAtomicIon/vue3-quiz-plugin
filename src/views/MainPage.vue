@@ -170,7 +170,7 @@ export default {
       answers: [
           {
             'id': 1,
-            'answer': 1
+            'answer': [1]
           },
           {
             'id': 2,
@@ -194,7 +194,7 @@ export default {
           },
           {
               'id': 5,
-              'answer': 2
+              'answer': [2]
           },
           {
               'id': 6,

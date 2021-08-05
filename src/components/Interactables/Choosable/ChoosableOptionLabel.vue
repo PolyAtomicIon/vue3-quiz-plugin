@@ -56,15 +56,20 @@ export default {
   }
 
   .active {
-    border: 3px cyan solid;
+    /* border: 3px cyan solid; */
+    position: relative;
+    background: cyan;
   }
 
   .wrong-choice {
-    border: 3px red solid;
+    /* border: 3px red solid; */
+    background: red;
+
   }
 
   .right-choice {
-    border: 3px green solid;
+    /* border: 3px green solid; */
+    background: green;
   }
 
 </style>

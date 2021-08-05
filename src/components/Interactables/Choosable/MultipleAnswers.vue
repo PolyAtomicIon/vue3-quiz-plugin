@@ -7,8 +7,8 @@
             @click="onOptionLabelChosen(item.variant)"
             :type="item.type"
             :source="item.source"
-
-            :class="{ active: isOptionChosen(item.variant), }"
+            :disabled="isSubmitted"
+            :class="labelStatusToClass(item.variant)"
         >
         </choosable-option-label>
     </div>
