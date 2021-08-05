@@ -5,7 +5,7 @@
             :iteration="questionIndex"
             :seconds-to-count-down="secondsToCountDown"
             :on-timer-end="checkAnswer"
-        />
+        ></timer-component>
 
         <!-- demo, for checking state of answers -->
         <div class="wrapper blue-background">
@@ -21,10 +21,10 @@
                     <question-component
                         :type="questions[questionIndex]?.task.type"
                         :content="questions[questionIndex]?.task.content"
-                    />
+                    ></question-component>
                     <interactable-panel
                         :question="questions[questionIndex]"  
-                    />
+                    ></interactable-panel>
                 </div>
             </transition-group>
         </div> 
