@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <q-page class="flex flex-center">
 
     <quiz-preview
       v-if="!isQuizStarted"
@@ -19,7 +19,7 @@
       :recieved-answers="recievedAnswers"
     ></quiz-result>
 
-  </div>
+  </q-page>
 </template>
 
 <script>
@@ -231,6 +231,6 @@ export default {
 
 <style scoped>
 .quiz-wr {
-  background: green;
+  /* background: green; */
 }
 </style>

@@ -3,49 +3,139 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
+
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
 }
+
 body {
-	line-height: 1;
+    line-height: 1;
 }
-ol, ul {
-	list-style: none;
+
+ol,
+ul {
+    list-style: none;
 }
-blockquote, q {
-	quotes: none;
+
+blockquote,
+q {
+    quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
 }
+
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
+
 
 /* after Reset */
 
@@ -65,7 +155,7 @@ table {
 }
 
 .slide-fade-leave-active {
-    transition: all 0   s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    transition: all 0 s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 
 .slide-fade-enter-from,
@@ -82,15 +172,12 @@ table {
     -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-
     border-radius: 5px;
     height: 100px;
     min-width: 250px;
-
     padding: 20px;
     margin: 10px;
-
-    border: solid 2px blue ;
+    border: solid 2px blue;
 }
 
 .interaction-panel {
@@ -106,8 +193,9 @@ table {
     width: 128px;
     background: cornsilk;
     border-radius: 5px;
-    box-shadow: rgba(255,0,0,0.25) 0px 1px 1px 1px;
+    box-shadow: rgba(255, 0, 0, 0.25) 0px 1px 1px 1px;
 }
+
 
 /* Choosable */
 
@@ -115,15 +203,11 @@ table {
     -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-
     border-radius: 5px;
-
     height: 100px;
     min-width: 100px;
-
     padding: 20px;
     margin: 10px;
-
 }
 
 .active {
@@ -135,7 +219,6 @@ table {
 .wrong-choice {
     /* border: 3px red solid; */
     background: red;
-
 }
 
 .right-choice {
@@ -143,11 +226,13 @@ table {
     background: green;
 }
 
+
 /* MultipleBase */
 
 .interactable {
     background: lightgreen;
 }
+
 
 /* DragDrop */
 
@@ -155,6 +240,7 @@ table {
     background: darkorange !important;
     opacity: 0;
 }
+
 .dragging-ticket {
     background: darkred !important;
     background-color: darkred !important;
@@ -162,60 +248,59 @@ table {
     box-shadow: none !important;
     border: 2px solid black;
 }
-.ghost-ticket {
-} 
 
+.ghost-ticket {}
 
 .row {
-    background: red;
     width: 100%;
     display: flex;
     justify-content: center;
-  }
+}
 
-  .column {
+.column {
     background: lightcoral;
     width: 350px;
     padding: 5px
-  }
+}
 
-  .options-group {
+.options-group {
     display: flex;
     min-height: 96px;
     background: indigo;
-  }
+}
 
-  .options-group-item {
+.options-group-item {
     background: darksalmon;
     padding: 20px;
     margin: 10px;
-  }
+}
 
-  .options-group-item:hover {
+.options-group-item:hover {
     background: darkseagreen;
-  }
+}
 
-  .text-container {
+.text-container {
     padding: 20px;
     margin: 10px;
     background: orange;
-  }
-  .two-row {
+}
+
+.two-row {
     display: flex;
     justify-content: space-between;
     background: lightcyan;
     margin: 2px 0px;
-  }
+}
 
-  .list-group {
+.list-group {
     background: chartreuse;
     min-height: 64px;
     max-height: 96px;
     width: 200px;
     margin: 10px
-  }
+}
 
-  .list-group-item {
+.list-group-item {
     background: lightseagreen;
     margin: 5px;
     border: solid 2px rgb(78, 75, 75);
@@ -223,24 +308,24 @@ table {
     font-weight: bold;
     cursor: move;
     padding: 20px;
-  }
+}
 
-  .list-group-item-right-choice {
+.list-group-item-right-choice {
     background: blue;
-  }
-  
-  .list-group-item-wrong-choice {
+}
+
+.list-group-item-wrong-choice {
     background: red;
-  }
+}
 
-  .list-group-item:hover {
+.list-group-item:hover {
     background: white;
-  }
+}
 
-  .paragraph {
+.paragraph {
     display: flex;
     max-width: 100%;
     flex-flow: row wrap;
     margin: 20px;
     background: khaki;
-  }
+}
