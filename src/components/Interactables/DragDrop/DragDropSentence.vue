@@ -44,7 +44,7 @@
               :move="isOptionDroppable"
               v-bind="dragOptions"
               group="people"
-              @change="[checkAndCleanUpDraggables]"
+              @change="checkAndCleanUpDraggables"
               itemKey="name"
               :disabled="isSubmitted"
             >
