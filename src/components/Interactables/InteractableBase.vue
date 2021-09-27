@@ -10,7 +10,7 @@
         },
         inject: ['showAnswers', 'recievedAnswers'],
         created() {
-            this.showAnswers.value[this.questionId] = false
+            this.showAnswers[this.questionId] = false
         },
         props: {
             questionId: {
@@ -37,12 +37,12 @@
         },
         methods: {
             submitResult(){
-                this.recievedAnswers.value[this.questionId] = this.recievedAnswer
+                this.recievedAnswers[this.questionId] = this.recievedAnswer
             },
         },
         computed: {
             isSubmitted(){
-                return this.showAnswers.value[this.questionId] 
+                return this.showAnswers[this.questionId] 
             },
         }
     }
