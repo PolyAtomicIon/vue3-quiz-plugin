@@ -230,4 +230,7 @@ export default {
 </script>
 
 <style scoped>
+.quiz-wr {
+  background: green;
+}
 </style>

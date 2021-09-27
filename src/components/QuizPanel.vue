@@ -1,12 +1,14 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper quiz-wr">
 
-        <timer-component
-            :iteration="questionIndex"
-            :seconds-to-count-down="secondsToCountDown"
-            :on-timer-end="checkAnswer"
-            v-show="!showAnswers[questionIndex + 1]"
-        ></timer-component>
+        <slot name="timer">
+            <timer-component
+                :iteration="questionIndex"
+                :seconds-to-count-down="secondsToCountDown"
+                :on-timer-end="checkAnswer"
+                v-show="!showAnswers[questionIndex + 1]"
+            ></timer-component>
+        </slot>
 
         <!-- demo, for checking state of answers -->
         <div class="wrapper blue-background">
